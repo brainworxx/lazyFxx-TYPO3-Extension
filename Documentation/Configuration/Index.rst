@@ -9,12 +9,14 @@
 Configuration and usage
 =======================
 
-The configuration options are placed in the extension manager.
+The configuration options are placed in the extension manager. When changing the configuration here, be sure to clear all caches afterwards.
 
 .. figure:: ../Images/em_configuration.png
 	:width: 880px
 	:align: left
 	:alt: Extension manager configuration for LazyFxx
+
+	Screenshot from the extension manager, where you can find the configuration options.
 
 
 Namespace of the processor classes
