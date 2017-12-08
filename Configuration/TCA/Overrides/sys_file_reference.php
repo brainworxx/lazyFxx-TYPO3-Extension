@@ -30,44 +30,6 @@
 $useDetault = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['lazyfxx'])['useDefaultProcessor'];
 
 if ($useDetault !== '1') {
-    // We let the user choose.
-    $_EXTKEY = 'lazyfxx';
-
-    // Scanning the processor folder for a dynamic class list.
-    $configPath = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY])['directory'];
-    $configPath = rtrim($configPath, '/') . '/';
-    $configPath = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($configPath);
-    $namespace = trim(unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY])['namespace']);
-
-    if (is_readable($configPath)) {
-        // Use the provided path from the configuration.
-        $configPath = $configPath . '*';
-    } else {
-        // Use the path from the extension as a fallback.
-        $configPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Processors/*';
-    }
-
-    $fileList = glob($configPath . '*');
-    $processorList = array();
-
-    $processorList[] = array(' --- ', 'do_nothing');
-
-    if (!empty($fileList)) {
-        foreach ($fileList as $filePath) {
-            $className = $namespace . pathinfo($filePath)['filename'];
-            $callBack = $className . '::getMyName';
-            if (is_callable($callBack)) {
-                if (call_user_func($className . '::isDefault', $className)) {
-                    // Default class goes first.
-                    array_unshift($processorList, call_user_func($callBack, $className));
-                } else {
-                    // Add it at the end.
-                    $processorList[] = call_user_func($callBack, $className);
-                }
-            }
-        }
-    }
-
     // Add the filter dropdown to the FAL image display in the backend.
     $tempColumns = array(
         'tx_lazyfxx_processor' => array(
@@ -76,7 +38,7 @@ if ($useDetault !== '1') {
             'config' => array(
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'items' => $processorList,
+                'items' => \Brainworxx\Lazyfxx\Tool\Box::retrieveProcessorList(),
                 'default' => '',
             )
         ),

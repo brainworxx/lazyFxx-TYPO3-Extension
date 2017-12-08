@@ -29,6 +29,7 @@
 
 namespace Brainworxx\Lazyfxx\Traits;
 
+use Brainworxx\Lazyfxx\Tool\Box;
 use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -62,7 +63,7 @@ trait ImageProcessor
         $useDefault = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['lazyfxx'])['useDefaultProcessor'];
 
         if ($useDefault === '1') {
-            $processor = $this->retrieveDefaultProcessor();
+            $processor = Box::retrieveDefaultProcessor();
         } else {
             $processor = $image->getReferenceProperties()['tx_lazyfxx_processor'];
         }
@@ -81,47 +82,5 @@ trait ImageProcessor
             $this->tag->addAttribute('data-src', $imageUri);
             $this->tag->addAttribute('class', $this->tag->getAttribute('class') . ' lazyload-placeholder');
         }
-    }
-
-    /**
-     * Retrieve the standard processor class, with some static caching.
-     *
-     * @return string
-     *   The standard processor class.
-     */
-    protected function retrieveDefaultProcessor()
-    {
-        static $processor;
-
-        if (empty($processor)) {
-            // Try to get the default processor.
-            // We use the last one that we find.
-            $_EXTKEY = 'lazyfxx';
-
-            // Scanning the processor folder for a dynamic class list.
-            $configPath = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY])['directory'];
-            $configPath = rtrim($configPath, '/') . '/';
-            $configPath = GeneralUtility::getFileAbsFileName($configPath);
-
-            if (is_readable($configPath)) {
-                // Use the provided path from the configuration.
-                $configPath = $configPath . '*';
-            } else {
-                // Use the path from the extension as a fallback.
-                $configPath = ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Processors/*';
-            }
-
-            $namespace = trim(unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY])['namespace']);
-
-            $fileList = glob($configPath);
-            foreach ($fileList as $filePath) {
-                $className = trim($namespace . pathinfo($filePath)['filename'], '\\');
-                if (call_user_func($className . '::isDefault', $className)) {
-                    $processor = $className;
-                }
-            }
-        }
-
-        return $processor;
     }
 }
