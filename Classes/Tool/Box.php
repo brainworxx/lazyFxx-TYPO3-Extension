@@ -25,7 +25,7 @@ class Box
      */
     public static function retrieveProcessorList()
     {
-        $namespace = trim(unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['lazyfxx'])['namespace']);
+        $namespace = rtrim(trim(unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['lazyfxx'])['namespace']),'\\') . '\\';
         $fileList = static::retrieveFileList();
         $processorList = array();
         $processorList[] = array(' --- ', 'do_nothing');
@@ -60,17 +60,18 @@ class Box
         static $processor;
 
         if (empty($processor)) {
-            $namespace = trim(unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['lazyfxx'])['namespace']);
+            $namespace = rtrim(trim(unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['lazyfxx'])['namespace']), '\\') . '\\';
 
             $fileList = static::retrieveFileList();
+
             foreach ($fileList as $filePath) {
                 $className = trim($namespace . pathinfo($filePath)['filename'], '\\');
                 if (is_callable($className . '::isDefault') && call_user_func($className . '::isDefault')) {
                     $processor = $className;
+                    break;
                 }
             }
         }
-
         return $processor;
     }
 
@@ -96,8 +97,6 @@ class Box
             $configPath = ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Processors/*';
         }
 
-        $fileList = glob($configPath);
-
-        return $fileList;
+        return glob($configPath);
     }
 }
