@@ -37,6 +37,7 @@ if ($useDetault !== '1') {
     $configPath = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY])['directory'];
     $configPath = rtrim($configPath, '/') . '/';
     $configPath = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($configPath);
+    $namespace = trim(unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY])['namespace']);
 
     if (is_readable($configPath)) {
         // Use the provided path from the configuration.
@@ -53,7 +54,7 @@ if ($useDetault !== '1') {
 
     if (!empty($fileList)) {
         foreach ($fileList as $filePath) {
-            $className = '\\Brainworxx\\Lazyfxx\\Processors\\' . pathinfo($filePath)['filename'];
+            $className = $namespace . pathinfo($filePath)['filename'];
             $callBack = $className . '::getMyName';
             if (is_callable($callBack)) {
                 if (call_user_func($className . '::isDefault', $className)) {

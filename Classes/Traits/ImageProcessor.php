@@ -111,9 +111,11 @@ trait ImageProcessor
                 $configPath = ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Processors/*';
             }
 
+            $namespace = trim(unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY])['namespace']);
+
             $fileList = glob($configPath);
             foreach ($fileList as $filePath) {
-                $className = 'Brainworxx\\Lazyfxx\\Processors\\' . pathinfo($filePath)['filename'];
+                $className = trim($namespace . pathinfo($filePath)['filename'], '\\');
                 if (call_user_func($className . '::isDefault', $className)) {
                     $processor = $className;
                 }

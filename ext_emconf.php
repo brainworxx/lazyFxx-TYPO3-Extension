@@ -28,22 +28,21 @@
  */
 
 $EM_CONF[$_EXTKEY] = array(
-  'title' => 'LazyFxx',
-  'description' => 'LazyFxx, lazy loading your images with style.',
-  'category' => 'fe',
-  'version' => '1.0.0',
-  'state' => 'beta',
-  'uploadfolder' => 0,
-  'clearCacheOnLoad' => 1,
-  'author' => 'BRAINWORXX GmbH',
-  'author_email' => 'tobias.guelzow@brainworxx.de',
-  'author_company' => 'BRAINWORXX GmbH',
-  'constraints' => array(
-    'depends' => array(
-      'typo3' => '8.7.0-8.7.99',
-	  'fluid_styled_content' => ''
+    'title' => 'LazyFxx',
+    'description' => 'LazyFxx, lazy loading your images with style.',
+    'category' => 'fe',
+    'version' => '1.0.0',
+    'state' => 'beta',
+    'uploadfolder' => 0,
+    'clearCacheOnLoad' => 1,
+    'author' => 'BRAINWORXX GmbH',
+    'author_email' => 'tobias.guelzow@brainworxx.de',
+    'author_company' => 'BRAINWORXX GmbH',
+    'constraints' => array(
+        'depends' => array(
+            'typo3' => '8.7.0-8.7.99',
+            'fluid_styled_content' => ''
+        ),
+        'conflicts' => array(),
     ),
-    'conflicts' => array(
-    ),
-  ),
 );
