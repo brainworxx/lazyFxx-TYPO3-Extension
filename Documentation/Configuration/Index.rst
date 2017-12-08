@@ -17,6 +17,11 @@ The configuration options are placed in the extension manager.
 	:alt: Extension manager configuration for LazyFxx
 
 
+Namespace of the processor classes
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The namespace of the processor classes that you want to use.
+
 Folder with the processor classes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

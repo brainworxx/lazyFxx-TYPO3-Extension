@@ -61,7 +61,6 @@ class Box
 
         if (empty($processor)) {
             $namespace = rtrim(trim(unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['lazyfxx'])['namespace']), '\\') . '\\';
-
             $fileList = static::retrieveFileList();
 
             foreach ($fileList as $filePath) {
