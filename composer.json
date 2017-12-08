@@ -1,0 +1,24 @@
+{
+  "name": "brainworxx/lazyfxx",
+  "type": "typo3-cms-extension",
+  "description": "LazyFxx, lazy loading your images with style.",
+  "homepage": "http://www.brainworxx.de",
+  "license": ["LGPL-2.1"],
+  "keywords": [
+    "image processing",
+    "ImageMagick",
+    "GraphicsMagick",
+    "lazy loading"
+  ],
+  "authors": [
+    {
+      "name": "Brainworxx",
+      "homepage": "http://www.brainworxx.de/"
+    }
+  ],
+  "autoload": {
+        "psr-4": {
+            "Brainworxx\\Lazyfxx\\": "Classes/"
+        }
+    }
+}

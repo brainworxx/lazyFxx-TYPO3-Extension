@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2017-04-24T13:07:00Z">
+        <header>
+            <type>misc</type>
+            <generator>LFEditor</generator>
+        </header>
+        <body>
+
+            <trans-unit id="folder.with.processors">
+                <source>Folder with the processor classes</source>
+            </trans-unit>
+            <trans-unit id="use.default.processor">
+                <source>Use default processor</source>
+            </trans-unit>
+            <trans-unit id="use.xclasses">
+                <source>Use X-Classes for the ViewHelpers</source>
+            </trans-unit>
+            <trans-unit id="filter.label">
+                <source>LazyFxx Filter</source>
+            </trans-unit>
+
+            <trans-unit id="filter.label.grayscale">
+                <source>Grayscale</source>
+            </trans-unit>
+            <trans-unit id="filter.label.grayscaleblur">
+                <source>Grayscale $ Blur</source>
+            </trans-unit>
+            <trans-unit id="filter.label.blur">
+                <source>Blur</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

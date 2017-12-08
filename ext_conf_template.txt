@@ -1,0 +1,8 @@
+# cat=processors; type=folder; label=LLL:EXT:lazyfxx/Resources/Private/Language/locallang.xlf:folder.with.processors
+directory = EXT:lazyfxx\Classes\Processors\
+
+# cat=processors; type=boolean; label=LLL:EXT:lazyfxx/Resources/Private/Language/locallang.xlf:use.default.processor
+useDefaultProcessor = true
+
+# cat=processors; type=boolean; label=LLL:EXT:lazyfxx/Resources/Private/Language/locallang.xlf:use.xclasses
+useXclasses = true

@@ -1,0 +1,30 @@
+.lazy-container * {
+    transition: opacity 500ms ease-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.lazy-container {
+    position: relative;
+}
+
+.lazy-container img.lazyload-original {
+    opacity: 0;
+}
+
+.lazy-container img.lazyload-placeholder,
+.lazy-container img.lazyload-show {
+    opacity: 1;
+}
+
+.lazy-container img.lazyload-show {
+    position: initial;
+}
+
+.lazy-container img.lazyload-hide {
+    opacity: 0;
+}
+
+
+
