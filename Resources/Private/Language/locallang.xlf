@@ -11,7 +11,7 @@
                 <source>Namespace of the processor classes: \Brainworxx\Lazyfxx\Processors\</source>
             </trans-unit>
             <trans-unit id="folder.with.processors">
-                <source>Folder with the processor classes: EXT:lazyfxx\Classes\Processors\</source>
+                <source>Folder with the processor classes: EXT:lazyfxx/Classes/Processors/</source>
             </trans-unit>
 
             <trans-unit id="use.default.processor">
