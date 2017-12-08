@@ -24,7 +24,7 @@
                 <source>Grayscale</source>
             </trans-unit>
             <trans-unit id="filter.label.grayscaleblur">
-                <source>Grayscale $ Blur</source>
+                <source>Grayscale and Blur</source>
             </trans-unit>
             <trans-unit id="filter.label.blur">
                 <source>Blur</source>
