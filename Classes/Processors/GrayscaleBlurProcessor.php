@@ -29,21 +29,16 @@
 
 namespace Brainworxx\Lazyfxx\Processors;
 
+
+
 class GrayscaleBlurProcessor extends AbstractProcessor
 {
-    public static function getMyName()
-    {
-        return array('LLL:EXT:lazyfxx/Resources/Private/Language/locallang.xlf:filter.label.grayscaleblur', __CLASS__);
-    }
-
     /**
-     * We use this one as the standard processor.
-     *
      * {@inheritdoc}
      */
-    public static function isDefault()
+    public static function getMyName()
     {
-        return true;
+        return array('LLL:EXT:lazyfxx/Resources/Private/Language/locallang.xlf:filter.label.grayscaleblur', static::class);
     }
 
     /**

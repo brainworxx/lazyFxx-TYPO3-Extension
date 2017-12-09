@@ -31,9 +31,12 @@ namespace Brainworxx\Lazyfxx\Processors;
 
 class GrayscaleProcessor extends AbstractProcessor
 {
+    /**
+     * {@inheritdoc}
+     */
     public static function getMyName()
     {
-        return array('LLL:EXT:lazyfxx/Resources/Private/Language/locallang.xlf:filter.label.grayscale', __CLASS__);
+        return array('LLL:EXT:lazyfxx/Resources/Private/Language/locallang.xlf:filter.label.grayscale', static::class);
     }
 
     /**

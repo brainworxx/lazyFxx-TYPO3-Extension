@@ -37,6 +37,8 @@ use TYPO3\CMS\Core\Utility\CommandUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Resource\ProcessedFileRepository;
 use TYPO3\CMS\Core\Imaging\GraphicalFunctions;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * Provides all necessary methods for image manipulation and backend
@@ -53,6 +55,43 @@ abstract class AbstractProcessor
      * @var string
      */
     protected $localCopy;
+
+    /**
+     * The default processor class, according to the typo script.
+     *
+     * @var string
+     */
+    protected static $default;
+
+    /**
+     * Determine, if this is the default processor.
+     *
+     * @return bool
+     *   The info, duh!
+     */
+    public static function isDefault()
+    {
+        // Try to determine the default processor.
+        if (empty(static::$default)) {
+            $settings = GeneralUtility::makeInstance(ObjectManager::class)
+                ->get(ConfigurationManagerInterface::class)
+                ->getConfiguration(
+                    ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+                );
+            // For unknown reasons, I was unable to get the ts settings via
+            // ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS.
+            // Meh, this will do. It will only get called, when wiping the red
+            // cache and only once.
+            if (isset($settings['plugin.']['tx_lazyfxx.']['settings.']['default'])) {
+                static::$default = $settings['plugin.']['tx_lazyfxx.']['settings.']['default'];
+            } else {
+                // Fall back to do nothing.
+                static::$default = 'do_nothing';
+            }
+        }
+        // Nice, huh? static::class is the class name of the extending class.
+        return (static::class === static::$default);
+    }
 
     /**
      * Simple Step for image processing. Use3d for batch processing in the
@@ -191,18 +230,7 @@ abstract class AbstractProcessor
     abstract public static function getMyName();
 
     /**
-     * Is this method the default processor?
-     *
-     * @return bool
-     *   Whether or not this processor is the default processor.
-     */
-    public static function isDefault()
-    {
-        return false;
-    }
-
-    /**
-     * The image manipulation instructions.
+     * The image manipulation instructions for ImageMagick.
      *
      * @usage
      *   $imageDims = $this->simpleProcessStep('identify','-format "%wx%h"');
@@ -214,5 +242,16 @@ abstract class AbstractProcessor
      */
     abstract protected function instructionsIm();
 
+    /**
+     * The image manipulation instructions for GraphicsMagick
+     *
+     * @usage
+     *   $imageDims = $this->simpleProcessStep('identify','-format "%wx%h"');
+     *   Get the dimensions of the image
+     *
+     *   $this->simpleProcessStep('convert', '-background white -magnify 2');
+     *   Doubling the size does not really make any sense . . .
+     *
+     */
     abstract protected function instructionsGm();
 }
