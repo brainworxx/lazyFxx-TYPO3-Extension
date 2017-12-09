@@ -52,13 +52,6 @@ class GrayscaleProcessor extends AbstractProcessor
      */
     protected function instructionsIm()
     {
-        // The normal gray scaling process is a little too dark for our taste.
-        $this->simpleProcessStep(
-            'convert',
-            "-channel R -evaluate multiply .2 " .
-            "-channel G -evaluate multiply .5 " .
-            "-channel B -evaluate multiply .3 " .
-            "+channel -separate -compose add -flatten"
-        );
+        $this->simpleProcessStep('convert', "-type GrayScaleMatte");
     }
 }
