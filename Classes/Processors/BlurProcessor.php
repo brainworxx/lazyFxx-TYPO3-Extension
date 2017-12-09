@@ -42,7 +42,10 @@ class BlurProcessor extends AbstractProcessor
      */
     public static function getMyName()
     {
-        return array('LLL:EXT:lazyfxx/Resources/Private/Language/locallang.xlf:filter.label.blur', static::class);
+        return array(
+            'LLL:EXT:lazyfxx/Resources/Private/Language/locallang.xlf:filter.label.blur',
+            static::class
+        );
     }
 
     /**

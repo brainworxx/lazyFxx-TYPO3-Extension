@@ -38,7 +38,10 @@ class GrayscaleBlurProcessor extends AbstractProcessor
      */
     public static function getMyName()
     {
-        return array('LLL:EXT:lazyfxx/Resources/Private/Language/locallang.xlf:filter.label.grayscaleblur', static::class);
+        return array(
+            'LLL:EXT:lazyfxx/Resources/Private/Language/locallang.xlf:filter.label.grayscaleblur',
+            static::class
+        );
     }
 
     /**

@@ -36,7 +36,10 @@ class GrayscaleProcessor extends AbstractProcessor
      */
     public static function getMyName()
     {
-        return array('LLL:EXT:lazyfxx/Resources/Private/Language/locallang.xlf:filter.label.grayscale', static::class);
+        return array(
+            'LLL:EXT:lazyfxx/Resources/Private/Language/locallang.xlf:filter.label.grayscale',
+            static::class
+        );
     }
 
     /**
