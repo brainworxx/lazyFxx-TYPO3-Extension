@@ -37,11 +37,14 @@ If you use this option, the redakteur will notbe able to choose the image proces
 
 From the provided processors, this is the :literal:`Grayscale and Blur` processor, because it makes the image really small.
 
-We have provided the following image processors:
+The default preocessor is set via TypScript:
 
-  - Grayscale
-  - Blur
-  - Grayscale and Blur
+.. code-block:: typoscript
+
+    plugin.tx_lazyfxx.settings {
+        # Defining the default processor.
+        default = Brainworxx\Lazyfxx\Processors\GrayscaleBlurProcessor
+    }
 
 Use X-Classes for the ViewHelpers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
