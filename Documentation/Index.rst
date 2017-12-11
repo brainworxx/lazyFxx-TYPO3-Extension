@@ -63,4 +63,5 @@ LazyFxx
 	Introduction/Index
 	Installation/Index
 	Configuration/Index
+	Extending/Index
 	Links/Index
