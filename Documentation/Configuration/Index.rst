@@ -33,11 +33,11 @@ The containing classes will not be autoloaded, so you have to use an extension t
 Use default processor
 ^^^^^^^^^^^^^^^^^^^^^
 
-If you use this option, the redakteur will notbe able to choose the image processor for the lazy loading. THe default processor will be uses.
+If you use this option, the redakteur will not be able to choose the image processor for the lazy loading. THe default processor will be uses.
 
 From the provided processors, this is the :literal:`Grayscale and Blur` processor, because it makes the image really small.
 
-The default preocessor is set via TypScript:
+The default processor is set via TypScript:
 
 .. code-block:: typoscript
 
@@ -54,7 +54,7 @@ If you check this option, LazyFxx will use X-Classes to add its functionality to
   - <f:image>
   - <f:media>
 
-Whenever one of these ViewHelpers is used in your templates, LazyFxx is also used. Of cause X-Classing them may cause trouble elsewhere, and you may want to coose when you actually provide lazy loading on the frontend.
+Whenever one of these ViewHelpers is used in your templates, LazyFxx is also used. Of cause X-Classing them may cause trouble elsewhere, and you may want to choose when you actually provide lazy loading on the frontend.
 That is why we have provided ViewHelpers for this purpose:
 
 .. code-block:: html
