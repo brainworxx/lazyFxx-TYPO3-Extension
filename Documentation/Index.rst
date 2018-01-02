@@ -61,6 +61,7 @@ LazyFxx
 	:titlesonly:
 
 	Introduction/Index
+	Changelog/Index
 	Installation/Index
 	Configuration/Index
 	Extending/Index
