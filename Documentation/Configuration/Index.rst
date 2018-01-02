@@ -70,3 +70,18 @@ That is why we have provided ViewHelpers for this purpose:
 
 The options for these VewHelpers are exactly the same as for the standard image anf media ViewHelpers.
 
+Use only the JavaScript and not the processor
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If you do not want to use the image processing of TYPO3 and only want to use the java script part, you only need to do the following:
+
+  - The src needs to point to the placeholder image.
+  - Add the class :literal:`lazyload-placeholder` to your image.
+  - Add the attribute :literal:`data-src` with the path to the image you want to load.
+  - Make sure that the files :literal:`lazyfxx.js` and :literal:`styles.css` are included on the frontend.
+
+.. code-block:: html
+
+    <f:image image="{imagePlaceholderObject}"
+             class="lazyload-placeholder"
+             data="{src: pathToOriginal}" />
