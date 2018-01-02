@@ -165,6 +165,7 @@
         // Get the placeholder.
         var placeholder = original.nextSibling;
         var container = original.parentNode;
+        var parent = container.parentNode;
 
         setTimeout(function(){
             placeholder.className += ' lazyload-hide';
@@ -188,7 +189,11 @@
                 placeholder.style['transition'] = '';
                 placeholder.classList.remove('lazyload-show');
                 placeholder.classList.remove('lazyload-original');
-                container.className = '';
+                placeholder.removeAttribute('data-src');
+                parent.insertBefore(placeholder, container);
+                parent.removeChild(container);
+
+
             }, 500);
 
             container.style = [];
