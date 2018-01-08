@@ -29,8 +29,6 @@
 
 namespace Brainworxx\Lazyfxx\Processors;
 
-
-
 class GrayscaleBlurProcessor extends AbstractProcessor
 {
     /**

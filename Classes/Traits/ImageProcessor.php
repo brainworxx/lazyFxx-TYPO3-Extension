@@ -31,8 +31,6 @@ namespace Brainworxx\Lazyfxx\Traits;
 
 use Brainworxx\Lazyfxx\Tool\Box;
 use TYPO3\CMS\Core\Resource\FileReference;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Holding typical functions for the image processing for viewhelpers.

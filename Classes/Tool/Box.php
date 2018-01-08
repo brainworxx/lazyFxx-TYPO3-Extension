@@ -25,7 +25,10 @@ class Box
      */
     public static function retrieveProcessorList()
     {
-        $namespace = rtrim(trim(unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['lazyfxx'])['namespace']),'\\') . '\\';
+        $namespace = rtrim(trim(unserialize(
+            $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['lazyfxx']
+        )['namespace']), '\\') . '\\';
+
         $fileList = static::retrieveFileList();
         $processorList = array();
         $processorList[] = array(' --- ', 'do_nothing');
@@ -60,7 +63,9 @@ class Box
         static $processor;
 
         if (empty($processor)) {
-            $namespace = rtrim(trim(unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['lazyfxx'])['namespace']), '\\') . '\\';
+            $namespace = rtrim(trim(unserialize(
+                $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['lazyfxx']
+            )['namespace']), '\\') . '\\';
             $fileList = static::retrieveFileList();
 
             foreach ($fileList as $filePath) {
