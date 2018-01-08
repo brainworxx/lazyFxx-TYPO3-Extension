@@ -12,7 +12,7 @@ Configuration and usage
 The configuration options are placed in the extension manager. When changing the configuration here, be sure to clear all caches afterwards.
 
 .. figure:: ../Images/em_configuration.png
-	:width: 880px
+	:width: 672px
 	:align: left
 	:alt: Extension manager configuration for LazyFxx
 
