@@ -33,16 +33,18 @@ $EM_CONF[$_EXTKEY] = array(
     'category' => 'fe',
     'version' => '1.0.0',
     'state' => 'beta',
-    'uploadfolder' => 0,
-    'clearCacheOnLoad' => 1,
+    'uploadfolder' => false,
+    'clearCacheOnLoad' => true,
     'author' => 'BRAINWORXX GmbH',
-    'author_email' => 'tobias.guelzow@brainworxx.de',
+    'author_email' => 'info@brainworxx.de',
     'author_company' => 'BRAINWORXX GmbH',
+    'createDirs' => '',
     'constraints' => array(
         'depends' => array(
             'typo3' => '8.7.0-8.7.99',
             'fluid_styled_content' => ''
         ),
         'conflicts' => array(),
+        'suggests' => array(),
     ),
 );
