@@ -19,7 +19,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 class Box
 {
     /**
-     * Retrieve a lcass list of image processors.
+     * Retrieve a cass list of image processors.
      *
      * @return array
      */

@@ -63,6 +63,6 @@ The ImageMMagick instructions, performed on your image. If you do not use ImageM
 Registering your processor classes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Now that you have created your own processor, you need to register it in lazyFxx. Go to the extension manager and open the imageFxx settings. Enter the namespace of your class as well as where imageFxx can find them. Then wipe all caches.
+Now that you have created your own processor, you need to register it in lazyFxx. Go to the extension manager and open the lazyFxx settings. Enter the namespace of your class as well as where imageFxx can find them. Then wipe all caches.
 
 lazyFxx will **not** autoload these classes, but will list the directory to get the class names from the file names.

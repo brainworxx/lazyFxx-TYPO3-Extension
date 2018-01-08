@@ -27,9 +27,9 @@
  *   Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-$useDetault = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['lazyfxx'])['useDefaultProcessor'];
+$useDefault = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['lazyfxx'])['useDefaultProcessor'];
 
-if ($useDetault !== '1') {
+if ($useDefault !== '1') {
     // Add the filter dropdown to the FAL image display in the backend.
     $tempColumns = array(
         'tx_lazyfxx_processor' => array(
