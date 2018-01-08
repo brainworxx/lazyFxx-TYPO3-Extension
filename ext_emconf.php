@@ -29,7 +29,7 @@
 
 $EM_CONF[$_EXTKEY] = array(
     'title' => 'LazyFxx',
-    'description' => 'LazyFxx, lazy loading your images with style.',
+    'description' => 'LazyFxx, image lazy loading with placeholders made by the TYPO3 image processing. You can also write your own image processors.',
     'category' => 'fe',
     'version' => '1.0.0',
     'state' => 'beta',
