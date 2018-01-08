@@ -203,7 +203,7 @@
     // Start the drama as soon as the DOM is ready.
     document.addEventListener("DOMContentLoaded", lazyFxx.onDocumentReady);
 
-    // Register in in the DOM
+    // Register it in the DOM
     window.lazyFxx = lazyFxx;
 
 })();
