@@ -13,7 +13,7 @@
             <trans-unit id="folder.with.processors">
                 <source>Folder with the processor classes: EXT:lazyfxx/Classes/Processors/</source>
             </trans-unit>
-
+            
             <trans-unit id="use.default.processor">
                 <source>Use default processor</source>
             </trans-unit>

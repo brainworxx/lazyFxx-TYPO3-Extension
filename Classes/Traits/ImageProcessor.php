@@ -71,12 +71,12 @@ trait ImageProcessor
 
         if (class_exists($processor)) {
             // Do our own processing.
-            $smallProcessingInstructions = $processingInstructions;
-            $smallProcessingInstructions['tx_lazyfxx_processor'] = $processor;
+            $processingInstructions['tx_lazyfxx_processor'] = $processor;
             $smallProcessedImage = $imageService->applyProcessingInstructions(
                 $image,
-                $smallProcessingInstructions
+                $processingInstructions
             );
+
             $smallImageUri = $imageService->getImageUri($smallProcessedImage, $this->arguments['absolute']);
 
             $this->tag->addAttribute('src', $smallImageUri);
@@ -124,6 +124,7 @@ trait ImageProcessor
         if (class_exists($processor)) {
             // Do our own processing.
             $processingInstructions['tx_lazyfxx_processor'] = $processor;
+            
             $smallProcessedImage = $imageService->applyProcessingInstructions(
                 $image,
                 $processingInstructions
