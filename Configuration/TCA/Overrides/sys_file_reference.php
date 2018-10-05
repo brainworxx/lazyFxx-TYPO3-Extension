@@ -36,18 +36,18 @@ $useDefault = \Brainworxx\Lazyfxx\Tool\Box::getSettings()['useDefaultProcessor']
 
 if ($useDefault !== '1') {
     // Add the filter dropdown to the FAL image display in the backend.
-    $tempColumns = array(
-        'tx_lazyfxx_processor' => array(
+    $tempColumns = [
+        'tx_lazyfxx_processor' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:lazyfxx/Resources/Private/Language/locallang.xlf:filter.label',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => \Brainworxx\Lazyfxx\Tool\Box::retrieveProcessorList(),
                 'default' => '',
-            )
-        ),
-    );
+            ]
+        ],
+    ];
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
         'sys_file_reference',
         $tempColumns

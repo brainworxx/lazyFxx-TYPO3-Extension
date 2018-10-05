@@ -27,32 +27,26 @@
  *   Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-$EM_CONF[$_EXTKEY] = array (
-  'title' => 'LazyFxx',
-  'description' => 'LazyFxx, image lazy loading with placeholders made by the TYPO3 image processing. You can also write your own image processors.',
-  'category' => 'fe',
-  'version' => '1.0.1',
-  'state' => 'beta',
-  'uploadfolder' => false,
-  'clearCacheOnLoad' => true,
-  'author' => 'BRAINWORXX GmbH',
-  'author_email' => 'info@brainworxx.de',
-  'author_company' => 'BRAINWORXX GmbH',
-  'createDirs' => '',
-  'constraints' =>
-  array (
-    'depends' =>
-    array (
-      'typo3' => '9.5.0-9.5.99',
-      'fluid_styled_content' => '',
-    ),
-    'conflicts' =>
-    array (
-    ),
-    'suggests' =>
-    array (
-    ),
-  ),
-  'clearcacheonload' => true,
-);
+$EM_CONF[$_EXTKEY] = [
+    'title' => 'LazyFxx',
+    'description' => 'LazyFxx, image lazy loading with placeholders made by the TYPO3 image processing. You can also write your own image processors.',
+    'category' => 'fe',
+    'version' => '1.0.1',
+    'state' => 'beta',
+    'uploadfolder' => false,
+    'clearCacheOnLoad' => true,
+    'author' => 'BRAINWORXX GmbH',
+    'author_email' => 'info@brainworxx.de',
+    'author_company' => 'BRAINWORXX GmbH',
+    'createDirs' => '',
+    'constraints' => [
+        'depends' => [
+            'typo3' => '9.5.0-9.5.99',
+            'fluid_styled_content' => '',
+        ],
+        'conflicts' => [],
+        'suggests' => [],
+    ],
+    'clearcacheonload' => true,
+];
 

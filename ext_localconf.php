@@ -56,14 +56,14 @@ $boot = function () {
     // Check for '1'. For some reason we get a 'true' string, in case we have no data.
     if (\Brainworxx\Lazyfxx\Tool\Box::getSettings()['useXclasses'] === '1') {
         // X-Classing the image viewhelper.
-        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Fluid\ViewHelpers\ImageViewHelper::class] = array(
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Fluid\ViewHelpers\ImageViewHelper::class] = [
             'className' => Brainworxx\Lazyfxx\Xclass\ImageViewHelper::class
-        );
+        ];
 
         // X-Classing the image viewhelper.
-        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Fluid\ViewHelpers\MediaViewHelper::class] = array(
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Fluid\ViewHelpers\MediaViewHelper::class] = [
             'className' => Brainworxx\Lazyfxx\Xclass\MediaViewHelper::class
-        );
+        ];
     }
 };
 

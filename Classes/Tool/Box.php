@@ -83,8 +83,8 @@ class Box
         $namespace = rtrim(trim(static::$settings['namespace']), '\\') . '\\';
 
         $fileList = static::retrieveFileList();
-        $processorList = array();
-        $processorList[] = array(' --- ', 'do_nothing');
+        $processorList = [];
+        $processorList[] = [' --- ', 'do_nothing'];
 
         if (!empty($fileList)) {
             foreach ($fileList as $filePath) {

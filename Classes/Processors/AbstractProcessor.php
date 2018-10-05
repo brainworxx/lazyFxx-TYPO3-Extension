@@ -120,7 +120,7 @@ abstract class AbstractProcessor
 
         $shellCommand = CommandUtility::imageMagickCommand($command, $parameters);
 
-        $out = array();
+        $out = [];
         $returnValue = 1;
         return CommandUtility::exec($shellCommand, $out, $returnValue);
     }
