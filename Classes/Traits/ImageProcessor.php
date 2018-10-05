@@ -44,7 +44,7 @@ trait ImageProcessor
     /**
      * Generate the uri for the Placeholder
      *
-     * @usage Use after:
+     * usage Use after:
      *   $this->tag->addAttribute('src', $imageUri);
      *
      * @param FileReference $image
@@ -92,7 +92,7 @@ trait ImageProcessor
      *   The file reference image.
      * @param array $processingInstructions
      *   The processing information.
-     * @param string $oldUri
+     * @param string $imageUri
      *   Fallback to the old uri.
      * @param \TYPO3\CMS\Extbase\Service\ImageService $imageService
      *   The image service.

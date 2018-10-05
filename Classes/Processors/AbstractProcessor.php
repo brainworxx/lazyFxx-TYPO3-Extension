@@ -182,7 +182,7 @@ abstract class AbstractProcessor
     /**
      * Do the processing of the image.
      *
-     * @ e v e n t \TYPO3\CMS\Core\Resource\Service\FileProcessingService::SIGNAL_PostFileProcess
+     * signal: \TYPO3\CMS\Core\Resource\Service\FileProcessingService::SIGNAL_PostFileProcess
      *
      * @param \TYPO3\CMS\Core\Resource\Service\FileProcessingService $processor
      *   The original file processing service
@@ -232,7 +232,7 @@ abstract class AbstractProcessor
     /**
      * The image manipulation instructions for ImageMagick.
      *
-     * @usage
+     * usage
      *   $imageDims = $this->simpleProcessStep('identify','-format "%wx%h"');
      *   Get the dimensions of the image
      *
@@ -245,7 +245,7 @@ abstract class AbstractProcessor
     /**
      * The image manipulation instructions for GraphicsMagick
      *
-     * @usage
+     * usage
      *   $imageDims = $this->simpleProcessStep('identify','-format "%wx%h"');
      *   Get the dimensions of the image
      *
