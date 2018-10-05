@@ -32,7 +32,7 @@ if (!defined('TYPO3_MODE')) {
 
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
-    $_EXTKEY,
+    'lazyfxx',
     'Configuration/TypoScript/',
     'LazyFxx'
 );

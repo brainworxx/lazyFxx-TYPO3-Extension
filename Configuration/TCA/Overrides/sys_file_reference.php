@@ -27,7 +27,12 @@
  *   Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-$useDefault = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['lazyfxx'])['useDefaultProcessor'];
+if (!defined('TYPO3_MODE')) {
+    die('Access denied.');
+}
+
+
+$useDefault = \Brainworxx\Lazyfxx\Tool\Box::getSettings()['useDefaultProcessor'];
 
 if ($useDefault !== '1') {
     // Add the filter dropdown to the FAL image display in the backend.

@@ -182,7 +182,7 @@ abstract class AbstractProcessor
     /**
      * Do the processing of the image.
      *
-     * @signal \TYPO3\CMS\Core\Resource\Service\FileProcessingService::SIGNAL_PostFileProcess
+     * @ e v e n t \TYPO3\CMS\Core\Resource\Service\FileProcessingService::SIGNAL_PostFileProcess
      *
      * @param \TYPO3\CMS\Core\Resource\Service\FileProcessingService $processor
      *   The original file processing service

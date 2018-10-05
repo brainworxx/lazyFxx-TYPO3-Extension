@@ -41,6 +41,9 @@ class MediaViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\MediaViewHelper
     /**
      * Render img tag. Pretty much the same as the original method.
      *
+     * Nevertheless, we do something special here, if we have a configuration:
+     * Use our own processor for the main
+     *
      * @param FileInterface $image
      * @param string $width
      * @param string $height

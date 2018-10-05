@@ -28,9 +28,11 @@
  */
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Resource\ProcessedFileRepository;
+use TYPO3\CMS\Core\Cache\CacheManager;
 
 /**
- * TYPO3 installation class for kreXX
+ * Flushes the page cache and deletes all processed images.
  */
 class ext_update
 {
@@ -43,7 +45,7 @@ class ext_update
      */
     public function access()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -52,8 +54,10 @@ class ext_update
     public function main()
     {
         // Flushing the processed images folder
-        $repository = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Resource\ProcessedFileRepository::class);
-        $cacheManager = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Cache\CacheManager::class);
+        /** @var ProcessedFileRepository $repository */
+        $repository = GeneralUtility::makeInstance(ProcessedFileRepository::class);
+        /** @var CacheManager $cacheManager */
+        $cacheManager = GeneralUtility::makeInstance(CacheManager::class);
 
         // remove all processed files
         $repository->removeAll();
@@ -61,6 +65,6 @@ class ext_update
         // clear page caches
         $cacheManager->flushCachesInGroup('pages');
 
-        return 'Flushed Page-Cache cleared all processed images!';
+        return 'Flushed Page-Cache and cleared all processed images!';
     }
 }

@@ -1,2 +1,5 @@
+v1.0.1
+- Updated to TYPO3 9.5
+
 v1.0.0
 - Initial release

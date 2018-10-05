@@ -31,6 +31,7 @@ namespace Brainworxx\Lazyfxx\Traits;
 
 use Brainworxx\Lazyfxx\Tool\Box;
 use TYPO3\CMS\Core\Resource\FileReference;
+use TYPO3\CMS\Extbase\Service\ImageService;
 
 /**
  * Holding typical functions for the image processing for viewhelpers.
@@ -51,16 +52,18 @@ trait ImageProcessor
      * @param string $imageUri
      * @param \TYPO3\CMS\Extbase\Service\ImageService $imageService
      */
-    protected function insertLazyFxx($image, array $processingInstructions, $imageUri, $imageService)
-    {
+    protected function insertLazyFxx(
+        $image,
+        array $processingInstructions,
+        string $imageUri,
+        ImageService $imageService
+    ): void {
         if (!is_a($image, FileReference::class)) {
             // Do nothing. This is not a file reference.
             return;
         }
 
-        $useDefault = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['lazyfxx'])['useDefaultProcessor'];
-
-        if ($useDefault === '1') {
+        if (Box::getSettings()['useDefaultProcessor'] === '1') {
             $processor = Box::retrieveDefaultProcessor();
         } else {
             $processor = $image->getReferenceProperties()['tx_lazyfxx_processor'];
@@ -80,5 +83,54 @@ trait ImageProcessor
             $this->tag->addAttribute('data-src', $imageUri);
             $this->tag->addAttribute('class', $this->tag->getAttribute('class') . ' lazyload-placeholder');
         }
+    }
+
+    /**
+     * Return the uri of the lazy image.
+     *
+     * @param FileReference $image
+     *   The file reference image.
+     * @param array $processingInstructions
+     *   The processing information.
+     * @param string $oldUri
+     *   Fallback to the old uri.
+     * @param \TYPO3\CMS\Extbase\Service\ImageService $imageService
+     *   The image service.
+     * @param bool $absolute
+     *   Are we using the absolute path.
+     *
+     * @return string
+     *   The processed uri, or the fallback uri.
+     */
+    protected static function returnLazyFxxUrl(
+        $image,
+        array $processingInstructions,
+        string $imageUri,
+        ImageService $imageService,
+        bool $absolute
+    ): string {
+
+        if (!is_a($image, FileReference::class)) {
+            // Do nothing. This is not a file reference.
+            return $imageUri;
+        }
+
+        if (Box::getSettings()['useDefaultProcessor'] === '1') {
+            $processor = Box::retrieveDefaultProcessor();
+        } else {
+            $processor = $image->getReferenceProperties()['tx_lazyfxx_processor'];
+        }
+
+        if (class_exists($processor)) {
+            // Do our own processing.
+            $processingInstructions['tx_lazyfxx_processor'] = $processor;
+            $smallProcessedImage = $imageService->applyProcessingInstructions(
+                $image,
+                $processingInstructions
+            );
+            return $imageService->getImageUri($smallProcessedImage, $absolute);
+        }
+
+        return $imageUri;
     }
 }

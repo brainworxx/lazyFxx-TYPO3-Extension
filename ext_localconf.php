@@ -48,15 +48,19 @@ $boot = function () {
         true
     );
 
-    $useXclasses = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['lazyfxx'])['useXclasses'];
+    // Store the settings. We use them all over the place.
+    \Brainworxx\Lazyfxx\Tool\Box::setSettings(\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+        \TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class
+    )->get('lazyfxx'));
 
-    if ($useXclasses === '1') {
-        // X-Classing the image viewhelper, so we can use our viewhelper
+    // Check for '1'. For some reason we get a 'true' string, in case we have no data.
+    if (\Brainworxx\Lazyfxx\Tool\Box::getSettings()['useXclasses'] === '1') {
+        // X-Classing the image viewhelper.
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Fluid\ViewHelpers\ImageViewHelper::class] = array(
             'className' => Brainworxx\Lazyfxx\Xclass\ImageViewHelper::class
         );
 
-        // X-Classing the image viewhelper, so we can use our viewhelper
+        // X-Classing the image viewhelper.
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Fluid\ViewHelpers\MediaViewHelper::class] = array(
             'className' => Brainworxx\Lazyfxx\Xclass\MediaViewHelper::class
         );
