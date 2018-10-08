@@ -58,7 +58,7 @@
     /**
      * Checking the visibility of the images when scrolling
      *
-     * @event scroll|resize
+     * @event interval
      */
     lazyFxx.checkList = function () {
         // Check on scroll, if any image is in viewport and trigger a lazy load.
@@ -117,12 +117,12 @@
         container.insertBefore(original, placeholder);
         // Replace the src.
         original.setAttribute('src', lazyFxx.getDataset(placeholder, 'src'));
-        // Remove the lazyload class, becase we ara already lazy laoding this one.
+        // Remove the lazyload class, because we ara already lazy loading this one.
         original.classList.remove('lazyload-placeholder');
 
         // Switch the image as soon as it's loaded.
         if (original.complete) {
-            // It's already laoded. Maybe from the cache?
+            // It's already loaded. Maybe from the cache?
             lazyFxx.switchPlaceholder(original);
         } else {
             original.addEventListener('load', lazyFxx.switchPlaceholder)
@@ -130,7 +130,7 @@
     };
 
     /**
-     * Gets the dataset from en element.
+     * Gets the dataset from an element.
      *
      * @param {Element} el
      * @param {string} what
@@ -192,8 +192,7 @@
                 placeholder.removeAttribute('data-src');
                 parent.insertBefore(placeholder, container);
                 parent.removeChild(container);
-
-
+                
             }, 500);
 
             container.style = [];
@@ -205,5 +204,8 @@
 
     // Register it in the DOM
     window.lazyFxx = lazyFxx;
+
+    // Return the lazyFxx object.
+    return lazyFxx;
 
 })();
