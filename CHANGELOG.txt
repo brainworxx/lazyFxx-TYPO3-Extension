@@ -1,6 +1,7 @@
 v1.0.1
 - Updated to TYPO3 9.5
 - Added uri viewhelper to get the uri of the processed image.
+- Minor code optimizations.
 
 v1.0.0
 - Initial release
