@@ -11,5 +11,5 @@ Installation
 
 Installation ist pretty much straight forward:
 
-  - Install normally via extension manager
+  - Install normally via extension manager or composer
   - Include the LazyFxx typoscript

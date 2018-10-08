@@ -13,7 +13,7 @@ lazyFxx allows you to create your own image processing classes:
 
   - Create an extension, if you have not done so already.
   - Create a new class somewhere in the class folder of your extension.
-  - Let this new class extend the :literal:`Brainworxx\Lazyfxx\Processors\AbstractProcessor`
+  - Let this new class extend the :literal:`\\Brainworxx\\Lazyfxx\\Processors\\AbstractProcessor`
   - Name your class XyzProcessor, where you can use whatever name you want, followed with :literal:`Processor`
   - The filename must be the same as the class name.
 
@@ -50,7 +50,7 @@ The GraphicsMagick instructions, performed on your image. If you do not use Grap
 3. instructionsIm()
 ^^^^^^^^^^^^^^^^^^^
 
-The ImageMMagick instructions, performed on your image. If you do not use ImageMagick, an empty method should be enough.
+The ImageMagick instructions, performed on your image. If you do not use ImageMagick, an empty method should be enough.
 
 .. code-block:: php
 

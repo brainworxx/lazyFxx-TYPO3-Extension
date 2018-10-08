@@ -6,17 +6,17 @@
 .. include:: ../Includes.txt
 
 
-Configuration and usage
-=======================
+Configuration and extending
+===========================
 
-The configuration options are placed in the extension manager. When changing the configuration here, be sure to clear all caches afterwards.
+The configuration options are placed in the settings manager. When changing the configuration here, be sure to clear all caches afterwards.
 
 .. figure:: ../Images/em_configuration.png
-	:width: 672px
+	:width: 1249px
 	:align: left
 	:alt: Extension manager configuration for LazyFxx
 
-	Screenshot from the extension manager, where you can find the configuration options.
+	Screenshot from the settings manager, where you can find the configuration options.
 
 
 Namespace of the processor classes
@@ -33,7 +33,7 @@ The containing classes will not be autoloaded, so you have to use an extension t
 Use default processor
 ^^^^^^^^^^^^^^^^^^^^^
 
-If you use this option, the redakteur will not be able to choose the image processor for the lazy loading. THe default processor will be uses.
+If you use this option, the redakteur will not be able to choose the image processor for the lazy loading. The default processor will be uses.
 
 From the provided processors, this is the :literal:`Grayscale and Blur` processor, because it makes the image really small.
 
@@ -70,18 +70,14 @@ That is why we have provided ViewHelpers for this purpose:
 
 The options for these VewHelpers are exactly the same as for the standard image anf media ViewHelpers.
 
-Use only the JavaScript and not the processor
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-If you do not want to use the image processing of TYPO3 and only want to use the java script part, you only need to do the following:
-
-  - The src needs to point to the placeholder image.
-  - Add the class :literal:`lazyload-placeholder` to your image.
-  - Add the attribute :literal:`data-src` with the path to the image you want to load.
-  - Make sure that the files :literal:`lazyfxx.js` and :literal:`styles.css` are included on the frontend.
+We have provided a uri viewhelper to get the path to the processed image. As wit hte other two viewhelpers, the options are exactly the same as the ones from the original viewhelper.
 
 .. code-block:: html
 
-    <f:image image="{imagePlaceholderObject}"
-             class="lazyload-placeholder"
-             data="{src: pathToOriginal}" />
+    <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+          xmlns:lfxx="http://typo3.org/ns/Brainworxx/Lazyfxx/ViewHelpers"
+          data-namespace-typo3-fluid="true">
+
+    <lfxx:uri.image image="{imageobject}" alt="some description" />
+
+    </html>
