@@ -100,6 +100,7 @@ class ImageViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\ImageViewHelper
             // Edit bwx
             $this->insertLazyFxx($image, $processingInstructions, $imageUri, $this->imageService);
             // Edit end.
+            
         } catch (ResourceDoesNotExistException $e) {
             // thrown if file does not exist
             throw new Exception($e->getMessage(), 1509741911, $e);

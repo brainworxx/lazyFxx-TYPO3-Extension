@@ -58,14 +58,16 @@ trait ImageProcessor
         string $imageUri,
         ImageService $imageService
     ): void {
-        if (!is_a($image, FileReference::class)) {
-            // Do nothing. This is not a file reference.
-            return;
-        }
 
         if (Box::getSettings()['useDefaultProcessor'] === '1') {
             $processor = Box::retrieveDefaultProcessor();
         } else {
+            if (!is_a($image, FileReference::class)) {
+                // Do nothing. This is not a file reference, and we do not have
+                // any processing options available.
+                return;
+            }
+
             $processor = $image->getReferenceProperties()['tx_lazyfxx_processor'];
         }
 
@@ -124,7 +126,7 @@ trait ImageProcessor
         if (class_exists($processor)) {
             // Do our own processing.
             $processingInstructions['tx_lazyfxx_processor'] = $processor;
-            
+
             $smallProcessedImage = $imageService->applyProcessingInstructions(
                 $image,
                 $processingInstructions
