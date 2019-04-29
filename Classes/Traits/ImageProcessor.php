@@ -42,6 +42,22 @@ trait ImageProcessor
 {
 
     /**
+     * Add an additional argument, to overwrite the configured processor.
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+
+        $this->registerArgument(
+            'overwriteProcessor',
+            'string',
+            'Overwrite the configured Processor. Please use the full qualified class name.',
+            false,
+            ''
+        );
+    }
+
+    /**
      * Generate the uri for the Placeholder
      *
      * usage Use after:
@@ -59,19 +75,18 @@ trait ImageProcessor
         ImageService $imageService
     ): void {
 
-        if (Box::getSettings()['useDefaultProcessor'] === '1') {
+        // Retrieve a possible processor class name.
+        if (!empty($this->arguments['overwriteProcessor'])) {
+            $processor = $this->arguments['overwriteProcessor'];
+        } elseif (Box::getSettings()['useDefaultProcessor'] === '1') {
             $processor = Box::retrieveDefaultProcessor();
-        } else {
-            if (!is_a($image, FileReference::class)) {
-                // Do nothing. This is not a file reference, and we do not have
-                // any processing options available.
-                return;
-            }
-
+        } elseif (is_a($image, FileReference::class)) {
             $processor = $image->getReferenceProperties()['tx_lazyfxx_processor'];
         }
 
-        if (class_exists($processor)) {
+        if (!empty($processor) &&
+            class_exists($processor)
+        ) {
             // Do our own processing.
             $processingInstructions['tx_lazyfxx_processor'] = $processor;
             $smallProcessedImage = $imageService->applyProcessingInstructions(
