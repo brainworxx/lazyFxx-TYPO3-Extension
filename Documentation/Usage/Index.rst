@@ -27,13 +27,21 @@ Those are essential the same as their original core counterparts.
           data-namespace-typo3-fluid="true">
 
     <!--
-       Render the ready-to-use lazy images for our js library.
+        Render the ready-to-use lazy images for our js library.
+        You need to provide the processing class, either by usinf the
+        option 'Use default processor' in the extension configuration,
+        or by using the overwriteProcessor argument.
+
+        If you are using the overwriteProcessor argument, please provide
+        a fully qualified class name.
      -->
     <lfxx:image src="path/to/my/image.png" alt="some description" />
-    <lfxx:media file="path/to/my/file.jpg" width="400" height="375" />
+    <lfxx:media file="path/to/my/file.jpg" width="400" height="375" overwriteProcessor="Brainworxx\Lazyfxx\Processors\BlurProcessor"/>
 
-    <!-- Get the uri of the lazy image -->
-    <lfxx:uri.image image="{imageobject}" alt="some description" />
+    <!--
+        Get the uri of the lazy image
+    -->
+    <lfxx:uri.image image="{imageReference}" alt="some description" />
 
     </html>
 
