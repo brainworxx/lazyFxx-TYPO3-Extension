@@ -31,6 +31,7 @@ namespace Brainworxx\Lazyfxx\Traits;
 
 use Brainworxx\Lazyfxx\Tool\Box;
 use TYPO3\CMS\Core\Resource\FileReference;
+use TYPO3\CMS\Core\Resource\ResourceInterface;
 use TYPO3\CMS\Extbase\Service\ImageService;
 
 /**
@@ -76,13 +77,10 @@ trait ImageProcessor
     ): void {
 
         // Retrieve a possible processor class name.
-        if (!empty($this->arguments['overwriteProcessor'])) {
-            $processor = $this->arguments['overwriteProcessor'];
-        } elseif (Box::getSettings()['useDefaultProcessor'] === '1') {
-            $processor = Box::retrieveDefaultProcessor();
-        } elseif (is_a($image, FileReference::class)) {
-            $processor = $image->getReferenceProperties()['tx_lazyfxx_processor'];
-        }
+        $processor = static::retrieveProcessorName(
+            $this->arguments,
+            $image
+        );
 
         if (!empty($processor) &&
             class_exists($processor)
@@ -115,6 +113,8 @@ trait ImageProcessor
      *   The image service.
      * @param bool $absolute
      *   Are we using the absolute path.
+     * @param array$arguments
+     *   The arguments from the template.
      *
      * @return string
      *   The processed uri, or the fallback uri.
@@ -124,19 +124,10 @@ trait ImageProcessor
         array $processingInstructions,
         string $imageUri,
         ImageService $imageService,
-        bool $absolute
+        bool $absolute,
+        array $arguments
     ): string {
-
-        if (!is_a($image, FileReference::class)) {
-            // Do nothing. This is not a file reference.
-            return $imageUri;
-        }
-
-        if (Box::getSettings()['useDefaultProcessor'] === '1') {
-            $processor = Box::retrieveDefaultProcessor();
-        } else {
-            $processor = $image->getReferenceProperties()['tx_lazyfxx_processor'];
-        }
+        $processor = static::retrieveProcessorName($arguments, $image);
 
         if (class_exists($processor)) {
             // Do our own processing.
@@ -150,5 +141,26 @@ trait ImageProcessor
         }
 
         return $imageUri;
+    }
+
+    /**
+     * Retrieve the configured processor name.
+     *
+     * @return string
+     */
+    protected static function retrieveProcessorName(array $arguments, ResourceInterface $image): string
+    {
+        $processor = '';
+
+        // Retrieve a possible processor class name.
+        if (!empty($arguments['overwriteProcessor'])) {
+            $processor = $arguments['overwriteProcessor'];
+        } elseif (Box::getSettings()['useDefaultProcessor'] === '1') {
+            $processor = Box::retrieveDefaultProcessor();
+        } elseif (is_a($image, FileReference::class)) {
+            $processor = $image->getReferenceProperties()['tx_lazyfxx_processor'];
+        }
+
+        return $processor;
     }
 }

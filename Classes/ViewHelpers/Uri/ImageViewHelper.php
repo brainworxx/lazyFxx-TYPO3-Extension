@@ -88,7 +88,8 @@ class ImageViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Uri\ImageViewHelper
                 $processingInstructions,
                 $imageService->getImageUri($processedImage, $absolute),
                 $imageService,
-                $absolute
+                $absolute,
+                $arguments
             );
             // edit end.
         } catch (ResourceDoesNotExistException $e) {
