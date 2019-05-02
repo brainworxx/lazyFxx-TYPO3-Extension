@@ -36,12 +36,12 @@ Those are essential the same as their original core counterparts.
         a fully qualified class name.
      -->
     <lfxx:image src="path/to/my/image.png" alt="some description" />
-    <lfxx:media file="path/to/my/file.jpg" width="400" height="375" overwriteProcessor="Brainworxx\Lazyfxx\Processors\BlurProcessor"/>
+    <lfxx:media file="{fileobject}" width="400" height="375" overwriteProcessor="Brainworxx\Lazyfxx\Processors\BlurProcessor"/>
 
     <!--
         Get the uri of the lazy image
     -->
-    <lfxx:uri.image image="{imageReference}" alt="some description" />
+    <lfxx:uri.image image="{imageReference}" overwriteProcessor="Brainworxx\Lazyfxx\Processors\BlurProcessor" />
 
     </html>
 
