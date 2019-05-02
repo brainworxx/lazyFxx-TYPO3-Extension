@@ -32,7 +32,7 @@ namespace Brainworxx\Lazyfxx\Xclass;
 use Brainworxx\Lazyfxx\Traits\ImageProcessor;
 use TYPO3\CMS\Core\Imaging\ImageManipulation\CropVariantCollection;
 use TYPO3\CMS\Core\Resource\Exception\ResourceDoesNotExistException;
-use TYPO3\CMS\Fluid\Core\ViewHelper\Exception;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Exception;
 
 class ImageViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\ImageViewHelper
 {
@@ -42,7 +42,7 @@ class ImageViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\ImageViewHelper
      * Pretty much the same as the original render function.
      *
      * Nevertheless, we do something special here, if we have a configuration:
-     * Use our own processor for the main
+     * Use our own processor for the main image.
      *
      * @see https://docs.typo3.org/typo3cms/TyposcriptReference/ContentObjects/Image/
      *
@@ -100,7 +100,7 @@ class ImageViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\ImageViewHelper
             // Edit bwx
             $this->insertLazyFxx($image, $processingInstructions, $imageUri, $this->imageService);
             // Edit end.
-            
+
         } catch (ResourceDoesNotExistException $e) {
             // thrown if file does not exist
             throw new Exception($e->getMessage(), 1509741911, $e);
