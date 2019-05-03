@@ -18,6 +18,7 @@ The configuration options are placed in the settings manager. When changing the 
 
 	Screenshot from the settings manager, where you can find the configuration options.
 
+Please clear the cache after saving the configuration.
 
 Namespace of the processor classes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
