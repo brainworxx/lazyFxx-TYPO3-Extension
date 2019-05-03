@@ -12,7 +12,7 @@ Usage in Fluid
 Viewhelpers
 ^^^^^^^^^^^
 
-LazyFxx is used inside the fluid templates. We hve provides tree viewhelpers for this:
+LazyFxx is used inside the fluid templates. We hve provides three viewhelpers for this:
 
   - Image viewhelper
   - Media viewhelper
@@ -45,6 +45,8 @@ Those are essential the same as their original core counterparts.
 
     </html>
 
+There is however an additional argument: :literal:`overwriteProcessor`. Here you can overwrite the configured processor class.
+
 Use only the processor, and  not the JavaScript
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -70,6 +72,7 @@ If you do not want to use the image processing of TYPO3 and only want to use the
 
 .. code-block:: html
 
+    <!-- example -->
     <f:image image="{imagePlaceholderObject}"
              class="lazyload-placeholder"
              data="{src: pathToOriginal}" />

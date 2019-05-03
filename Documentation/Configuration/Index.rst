@@ -18,6 +18,7 @@ The configuration options are placed in the settings manager. When changing the 
 
 	Screenshot from the settings manager, where you can find the configuration options.
 
+
 Please clear the cache after saving the configuration.
 
 Namespace of the processor classes
@@ -34,7 +35,7 @@ The containing classes will not be autoloaded, so you have to use an extension t
 Use default processor
 ^^^^^^^^^^^^^^^^^^^^^
 
-If you use this option, the redakteur will not be able to choose the image processor for the lazy loading. The default processor will be uses.
+If you use this option, the redakteur will not be able to choose the image processor for the lazy loading. The default processor will be used.
 
 From the provided processors, this is the :literal:`Grayscale and Blur` processor, because it makes the image really small.
 
