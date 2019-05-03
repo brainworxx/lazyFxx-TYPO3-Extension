@@ -29,6 +29,7 @@
 
 namespace Brainworxx\Lazyfxx\Signals;
 
+use Brainworxx\Lazyfxx\Processors\AbstractProcessor;
 use TYPO3\CMS\Core\Resource\FileInterface;
 use TYPO3\CMS\Core\Resource\ProcessedFile;
 use TYPO3\CMS\Core\Resource\Service\FileProcessingService;
@@ -91,7 +92,9 @@ class UseProcessFile
             // Jep, we need to do stuff.
             /** @var \Brainworxx\Lazyfxx\Processors\AbstractProcessor $processor */
             $fxxProcessor = $this->objectManager->get($configuration['tx_lazyfxx_processor']);
-            $fxxProcessor->process($processor, $driver, $processedFile, $file, $context, $configuration);
+            if ($fxxProcessor instanceof AbstractProcessor) {
+                $fxxProcessor->process($processor, $driver, $processedFile, $file, $context, $configuration);
+            }
         }
     }
 }
