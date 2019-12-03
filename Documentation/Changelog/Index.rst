@@ -9,6 +9,9 @@
 Changelog
 =========
 
+1.1.1
+   - Updated the composer file.
+
 1.1.0
    - Allow the fluid template to overwrite the configured processor class.
    - Bugfix: Allow the processing of file objects when there are processing options available.
