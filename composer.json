@@ -25,7 +25,6 @@
     }
   },
   "replace": {
-    "lazyfxx": "self.version",
     "typo3-ter/lazyfxx": "self.version"
   },
   "extra": {
