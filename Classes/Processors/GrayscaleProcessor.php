@@ -1,4 +1,5 @@
 <?php
+
 /**
  * lazyFxx: Lazy Loading Effects
  *
@@ -34,7 +35,7 @@ class GrayscaleProcessor extends AbstractProcessor
     /**
      * {@inheritdoc}
      */
-    public static function getMyName()
+    public static function getMyName(): array
     {
         return [
             'LLL:EXT:lazyfxx/Resources/Private/Language/locallang.xlf:filter.label.grayscale',
@@ -45,7 +46,7 @@ class GrayscaleProcessor extends AbstractProcessor
     /**
      * Simply make it gray.
      */
-    protected function instructionsGm()
+    protected function instructionsGm(): void
     {
         $this->simpleProcessStep('convert', "-colorspace GRAY +matte");
     }
@@ -53,7 +54,7 @@ class GrayscaleProcessor extends AbstractProcessor
     /**
      * Simply make it gray.
      */
-    protected function instructionsIm()
+    protected function instructionsIm(): void
     {
         $this->simpleProcessStep('convert', "-type GrayScaleMatte");
     }

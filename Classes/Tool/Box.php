@@ -1,4 +1,5 @@
 <?php
+
 /**
  * lazyFxx: Lazy Loading Effects
  *
@@ -68,7 +69,7 @@ class Box
      * @return array $settings
      *   The settings.
      */
-    public static function getSettings()
+    public static function getSettings(): array
     {
         return static::$settings;
     }
@@ -78,7 +79,7 @@ class Box
      *
      * @return array
      */
-    public static function retrieveProcessorList()
+    public static function retrieveProcessorList(): array
     {
         $namespace = rtrim(trim(static::$settings['namespace']), '\\') . '\\';
 
@@ -111,9 +112,9 @@ class Box
      * @return string
      *   The standard processor class.
      */
-    public static function retrieveDefaultProcessor()
+    public static function retrieveDefaultProcessor(): string
     {
-        static $processor;
+        static $processor = '';
 
         if (empty($processor)) {
             $namespace = rtrim(trim(static::$settings['namespace']), '\\') . '\\';
@@ -135,7 +136,7 @@ class Box
      *
      * @return array
      */
-    protected static function retrieveFileList()
+    protected static function retrieveFileList(): array
     {
         // Scanning the processor folder for a dynamic class list.
         $configPath = static::$settings['directory'];

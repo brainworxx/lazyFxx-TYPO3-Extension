@@ -1,4 +1,5 @@
 <?php
+
 /**
  * lazyFxx: Lazy Loading Effects
  *
@@ -34,7 +35,7 @@ class GrayscaleBlurProcessor extends AbstractProcessor
     /**
      * {@inheritdoc}
      */
-    public static function getMyName()
+    public static function getMyName(): array
     {
         return [
             'LLL:EXT:lazyfxx/Resources/Private/Language/locallang.xlf:filter.label.grayscaleblur',
@@ -45,7 +46,7 @@ class GrayscaleBlurProcessor extends AbstractProcessor
     /**
      * Gray and blured for minimized image size.
      */
-    protected function instructionsGm()
+    protected function instructionsGm(): void
     {
         // Greyscale
         $this->simpleProcessStep('convert', "-colorspace GRAY +matte");
@@ -53,7 +54,7 @@ class GrayscaleBlurProcessor extends AbstractProcessor
         $this->simpleProcessStep('convert', "-blur 0x8");
     }
 
-    protected function instructionsIm()
+    protected function instructionsIm(): void
     {
          // Greyscale
         $this->simpleProcessStep('convert', "-type GrayScaleMatte");

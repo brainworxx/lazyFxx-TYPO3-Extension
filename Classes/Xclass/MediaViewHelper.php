@@ -1,4 +1,5 @@
 <?php
+
 /**
  * lazyFxx: Lazy Loading Effects
  *
@@ -39,17 +40,14 @@ class MediaViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\MediaViewHelper
     use ImageProcessor;
 
     /**
-     * Render img tag. Pretty much the same as the original method.
+     * Pretty much the same as the original render method.
      *
      * Nevertheless, we do something special here, if we have a configuration:
-     * Use our own processor for the main
+     * Use our own processor for the main image.
      *
-     * @param FileInterface $image
-     * @param string $width
-     * @param string $height
-     * @return string Rendered img tag
+     * {@inheritDoc}
      */
-    protected function renderImage(FileInterface $image, $width, $height)
+    protected function renderImage(FileInterface $image, $width, $height, ?string $fileExtension)
     {
         $cropVariant = $this->arguments['cropVariant'] ?: 'default';
         $cropString = $image instanceof FileReference ? $image->getProperty('crop') : '';
@@ -60,6 +58,9 @@ class MediaViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\MediaViewHelper
             'height' => $height,
             'crop' => $cropArea->isEmpty() ? null : $cropArea->makeAbsoluteBasedOnFile($image),
         ];
+        if (!empty($fileExtension)) {
+            $processingInstructions['fileExtension'] = $fileExtension;
+        }
         $imageService = $this->getImageService();
         $processedImage = $imageService->applyProcessingInstructions($image, $processingInstructions);
         $imageUri = $imageService->getImageUri($processedImage);
@@ -73,6 +74,9 @@ class MediaViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\MediaViewHelper
         $this->tag->addAttribute('src', $imageUri);
         $this->tag->addAttribute('width', $processedImage->getProperty('width'));
         $this->tag->addAttribute('height', $processedImage->getProperty('height'));
+        if (in_array($this->arguments['loading'] ?? '', ['lazy', 'eager', 'auto'], true)) {
+            $this->tag->addAttribute('loading', $this->arguments['loading']);
+        }
 
         $alt = $image->getProperty('alternative');
         $title = $image->getProperty('title');
@@ -88,6 +92,7 @@ class MediaViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\MediaViewHelper
         // Edit bwx
         $this->insertLazyFxx($image, $processingInstructions, $imageUri, $imageService);
         // Edit end.
+
         return $this->tag->render();
     }
 }

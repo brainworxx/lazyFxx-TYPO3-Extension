@@ -1,0 +1,15 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Brainworxx\Lazyfxx\:
+    resource: '../Classes/*'
+
+  Brainworxx\Lazyfxx\Signals\UseProcessFile:
+    tags:
+      - name: event.listener
+        identifier: 'lazyfxx.postProcess'
+        method: 'postProcess'
+        event: TYPO3\CMS\Core\Resource\Event\AfterFileProcessingEvent

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * lazyFxx: Lazy Loading Effects
  *
@@ -29,10 +30,7 @@
 
 namespace Brainworxx\Lazyfxx\Processors;
 
-use TYPO3\CMS\Core\Resource\FileInterface;
 use TYPO3\CMS\Core\Resource\ProcessedFile;
-use TYPO3\CMS\Core\Resource\Service\FileProcessingService;
-use TYPO3\CMS\Core\Resource\Driver\DriverInterface;
 use TYPO3\CMS\Core\Utility\CommandUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Resource\ProcessedFileRepository;
@@ -66,10 +64,12 @@ abstract class AbstractProcessor
     /**
      * Determine, if this is the default processor.
      *
+     * @throws \TYPO3\CMS\Extbase\Object\Exception
+     *
      * @return bool
      *   The info, duh!
      */
-    public static function isDefault()
+    public static function isDefault(): bool
     {
         // Try to determine the default processor.
         if (empty(static::$default)) {
@@ -109,7 +109,7 @@ abstract class AbstractProcessor
      * @return string
      *   Returns the last line from the shell.
      */
-    protected function simpleProcessStep($command, $parameter)
+    protected function simpleProcessStep($command, $parameter): string
     {
         $parameters = $this->localCopy . ' ' . $parameter;
 
@@ -131,7 +131,7 @@ abstract class AbstractProcessor
      * @param \TYPO3\CMS\Core\Resource\ProcessedFile $processedFile
      *   The processed file object we want to manipulate.
      */
-    protected function updateProperties(ProcessedFile $processedFile)
+    protected function updateProperties(ProcessedFile $processedFile): void
     {
         // Get the new dimension and the checksum of the new file
         $imageDimensions = $this->getGraphicalFunctionsObject()->getImageDimensions($this->localCopy);
@@ -167,7 +167,7 @@ abstract class AbstractProcessor
      *
      * @return \TYPO3\CMS\Core\Imaging\GraphicalFunctions
      */
-    protected function getGraphicalFunctionsObject()
+    protected function getGraphicalFunctionsObject(): GraphicalFunctions
     {
         static $graphicalFunctionsObject = null;
 
@@ -182,29 +182,14 @@ abstract class AbstractProcessor
     /**
      * Do the processing of the image.
      *
-     * signal: \TYPO3\CMS\Core\Resource\Service\FileProcessingService::SIGNAL_PostFileProcess
+     * @ event TYPO3\CMS\Core\Resource\Event\AfterFileProcessingEvent
+     *   Meh, I can not use the real tag, because Doctrine will try to interpret it.
      *
-     * @param \TYPO3\CMS\Core\Resource\Service\FileProcessingService $processor
-     *   The original file processing service
-     * @param \TYPO3\CMS\Core\Resource\Driver\DriverInterface $driver
-     *   The FAL driver where the image is located.
      * @param \TYPO3\CMS\Core\Resource\ProcessedFile $processedFile
      *   The processed image FAL object.
-     * @param \TYPO3\CMS\Core\Resource\FileInterface $file
-     *   The original FAL object.
-     * @param $context
-     *   just a string? I have no idea. :-(
-     * @param array $configuration
-     *   The processing configuration.
      */
-    public function process(
-        FileProcessingService $processor,
-        DriverInterface $driver,
-        ProcessedFile $processedFile,
-        FileInterface $file,
-        $context,
-        array $configuration
-    ) {
+    public function process(ProcessedFile $processedFile): void
+    {
         if ($processedFile->getTask()->isExecuted()) {
             // Assign the file to the localCopy, so the simpleProcessStep can
             // access it.
@@ -225,9 +210,9 @@ abstract class AbstractProcessor
     /**
      * Return the name of the processor for the backend.
      *
-     * @return string
+     * @return array
      */
-    abstract public static function getMyName();
+    abstract public static function getMyName(): array;
 
     /**
      * The image manipulation instructions for ImageMagick.
@@ -240,7 +225,7 @@ abstract class AbstractProcessor
      *   Doubling the size does not really make any sense . . .
      *
      */
-    abstract protected function instructionsIm();
+    abstract protected function instructionsIm(): void;
 
     /**
      * The image manipulation instructions for GraphicsMagick
@@ -253,5 +238,5 @@ abstract class AbstractProcessor
      *   Doubling the size does not really make any sense . . .
      *
      */
-    abstract protected function instructionsGm();
+    abstract protected function instructionsGm(): void;
 }

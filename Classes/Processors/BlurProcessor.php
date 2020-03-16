@@ -1,4 +1,5 @@
 <?php
+
 /**
  * lazyFxx: Lazy Loading Effects
  *
@@ -40,7 +41,7 @@ class BlurProcessor extends AbstractProcessor
     /**
      * {@inheritdoc}
      */
-    public static function getMyName()
+    public static function getMyName(): array
     {
         return [
             'LLL:EXT:lazyfxx/Resources/Private/Language/locallang.xlf:filter.label.blur',
@@ -51,7 +52,7 @@ class BlurProcessor extends AbstractProcessor
     /**
      * Blurring stuff, for fun and profit.
      */
-    protected function instructionsGm()
+    protected function instructionsGm(): void
     {
         $this->simpleProcessStep('convert', "-blur 0x8");
     }
@@ -59,7 +60,7 @@ class BlurProcessor extends AbstractProcessor
     /**
      * Blurring stuff, for fun and profit.
      */
-    protected function instructionsIm()
+    protected function instructionsIm(): void
     {
         $this->simpleProcessStep('convert', "-blur 0x8");
     }

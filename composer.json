@@ -2,9 +2,9 @@
   "name": "brainworxx/lazyfxx",
   "type": "typo3-cms-extension",
   "description": "LazyFxx, image lazy loading with placeholders made by the TYPO3 image processing. You can also write your own image processors.",
-  "homepage": "http://www.brainworxx.de",
+  "homepage": "https://github.com/brainworxx/lazyFxx-TYPO3-Extension",
   "license": [
-    "LGPL-2.1"
+    "LGPL-2.1-or-later"
   ],
   "keywords": [
     "image processing",
@@ -13,6 +13,9 @@
     "lazy loading",
     "pagespeed"
   ],
+  "require": {
+    "typo3/cms-core": ">=10.3.0 <=10.4.99"
+  },
   "authors": [
     {
       "name": "Brainworxx",

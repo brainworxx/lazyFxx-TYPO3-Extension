@@ -37,17 +37,6 @@ $boot = function () {
         \TYPO3\CMS\Extbase\SignalSlot\Dispatcher::class
     );
 
-    // The viewhelper will either add the configuration, or not to the processed
-    // image. We we have a configuration there, we will use it here.
-    // If not, we do the normal processing.
-    $signalSlotDispatcher->connect(
-        \TYPO3\CMS\Core\Resource\ResourceStorage::class,
-        \TYPO3\CMS\Core\Resource\Service\FileProcessingService::SIGNAL_PostFileProcess,
-        Brainworxx\Lazyfxx\Signals\UseProcessFile::class,
-        'postProcess',
-        true
-    );
-
     // Store the settings. We use them all over the place.
     \Brainworxx\Lazyfxx\Tool\Box::setSettings(\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
         \TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class

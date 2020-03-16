@@ -37,12 +37,10 @@ $EM_CONF[$_EXTKEY] = [
     'clearCacheOnLoad' => true,
     'author' => 'BRAINWORXX GmbH',
     'author_email' => 'info@brainworxx.de',
-    'author_company' => 'BRAINWORXX GmbH',
     'createDirs' => '',
     'constraints' => [
         'depends' => [
-            'typo3' => '9.5.0-9.5.99',
-            'fluid_styled_content' => '',
+            'typo3' => '10.3.0-10.4.99'
         ],
         'conflicts' => [],
         'suggests' => [],

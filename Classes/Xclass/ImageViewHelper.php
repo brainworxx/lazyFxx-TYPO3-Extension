@@ -1,4 +1,5 @@
 <?php
+
 /**
  * lazyFxx: Lazy Loading Effects
  *
@@ -39,24 +40,21 @@ class ImageViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\ImageViewHelper
     use ImageProcessor;
 
     /**
-     * Pretty much the same as the original render function.
+     * Pretty much the same as the original render method.
      *
      * Nevertheless, we do something special here, if we have a configuration:
      * Use our own processor for the main image.
      *
-     * @see https://docs.typo3.org/typo3cms/TyposcriptReference/ContentObjects/Image/
-     *
-     * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
-     * @return string Rendered tag
+     * {@inheritDoc}
      */
     public function render()
     {
-        if (($this->arguments['src'] === null && $this->arguments['image'] === null) || ($this->arguments['src'] !== null && $this->arguments['image'] !== null)) {
+        if (($this->arguments['src'] === '' && $this->arguments['image'] === null) || ($this->arguments['src'] !== '' && $this->arguments['image'] !== null)) {
             throw new Exception('You must either specify a string src or a File object.', 1382284106);
         }
 
         try {
-            $image = $this->imageService->getImage($this->arguments['src'], $this->arguments['image'], $this->arguments['treatIdAsReference']);
+            $image = $this->imageService->getImage((string)$this->arguments['src'], $this->arguments['image'], (bool)$this->arguments['treatIdAsReference']);
             $cropString = $this->arguments['crop'];
             if ($cropString === null && $image->hasProperty('crop') && $image->getProperty('crop')) {
                 $cropString = $image->getProperty('crop');
@@ -73,6 +71,9 @@ class ImageViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\ImageViewHelper
                 'maxHeight' => $this->arguments['maxHeight'],
                 'crop' => $cropArea->isEmpty() ? null : $cropArea->makeAbsoluteBasedOnFile($image),
             ];
+            if (!empty($this->arguments['fileExtension'] ?? '')) {
+                $processingInstructions['fileExtension'] = $this->arguments['fileExtension'];
+            }
             $processedImage = $this->imageService->applyProcessingInstructions($image, $processingInstructions);
             $imageUri = $this->imageService->getImageUri($processedImage, $this->arguments['absolute']);
 
@@ -86,21 +87,17 @@ class ImageViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\ImageViewHelper
             $this->tag->addAttribute('width', $processedImage->getProperty('width'));
             $this->tag->addAttribute('height', $processedImage->getProperty('height'));
 
-            $alt = $image->getProperty('alternative');
-            $title = $image->getProperty('title');
-
             // The alt-attribute is mandatory to have valid html-code, therefore add it even if it is empty
             if (empty($this->arguments['alt'])) {
-                $this->tag->addAttribute('alt', $alt);
+                $this->tag->addAttribute('alt', $image->hasProperty('alternative') ? $image->getProperty('alternative') : '');
             }
-            if (empty($this->arguments['title']) && $title) {
-                $this->tag->addAttribute('title', $title);
+            if (empty($this->arguments['title']) && $image->hasProperty('title')) {
+                $this->tag->addAttribute('title', $image->getProperty('title'));
             }
 
             // Edit bwx
             $this->insertLazyFxx($image, $processingInstructions, $imageUri, $this->imageService);
             // Edit end.
-
         } catch (ResourceDoesNotExistException $e) {
             // thrown if file does not exist
             throw new Exception($e->getMessage(), 1509741911, $e);

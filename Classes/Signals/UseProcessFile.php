@@ -1,4 +1,5 @@
 <?php
+
 /**
  * lazyFxx: Lazy Loading Effects
  *
@@ -30,10 +31,7 @@
 namespace Brainworxx\Lazyfxx\Signals;
 
 use Brainworxx\Lazyfxx\Processors\AbstractProcessor;
-use TYPO3\CMS\Core\Resource\FileInterface;
-use TYPO3\CMS\Core\Resource\ProcessedFile;
-use TYPO3\CMS\Core\Resource\Service\FileProcessingService;
-use TYPO3\CMS\Core\Resource\Driver\DriverInterface;
+use TYPO3\CMS\Core\Resource\Event\AfterFileProcessingEvent;
 use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 
 /**
@@ -64,7 +62,7 @@ class UseProcessFile
      *
      * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
      */
-    public function injectObjectManager(ObjectManagerInterface $objectManager)
+    public function __construct(ObjectManagerInterface $objectManager)
     {
         $this->objectManager = $objectManager;
     }
@@ -72,29 +70,22 @@ class UseProcessFile
     /**
      * Post processing the files, using the registered processor class.
      *
-     * @param FileProcessingService $processor
-     * @param DriverInterface $driver
-     * @param ProcessedFile $processedFile
-     * @param FileInterface $file
-     * @param string $context
-     * @param array $configuration
+     * @param \TYPO3\CMS\Core\Resource\Event\AfterFileProcessingEvent $event
+     *   The model, that holds all the event data.
      */
-    public function postProcess(
-        FileProcessingService $processor,
-        DriverInterface $driver,
-        ProcessedFile $processedFile,
-        FileInterface $file,
-        $context,
-        array $configuration
-    ) {
+    public function postProcess(AfterFileProcessingEvent $event): void
+    {
+        $configuration = $event->getConfiguration();
+
         // Test if we have to do anything.
-        if (isset($configuration['tx_lazyfxx_processor']) && class_exists($configuration['tx_lazyfxx_processor'])) {
+        if (
+            isset($configuration['tx_lazyfxx_processor']) &&
+            class_exists($configuration['tx_lazyfxx_processor']) &&
+            is_a($configuration['tx_lazyfxx_processor'], AbstractProcessor::class, true)
+        ) {
             // Jep, we need to do stuff.
-            /** @var \Brainworxx\Lazyfxx\Processors\AbstractProcessor $processor */
-            $fxxProcessor = $this->objectManager->get($configuration['tx_lazyfxx_processor']);
-            if ($fxxProcessor instanceof AbstractProcessor) {
-                $fxxProcessor->process($processor, $driver, $processedFile, $file, $context, $configuration);
-            }
+            $this->objectManager->get($configuration['tx_lazyfxx_processor'])
+                ->process($event->getProcessedFile());
         }
     }
 }

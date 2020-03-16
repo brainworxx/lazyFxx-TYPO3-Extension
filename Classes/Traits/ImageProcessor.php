@@ -1,4 +1,5 @@
 <?php
+
 /**
  * lazyFxx: Lazy Loading Effects
  *
@@ -41,7 +42,6 @@ use TYPO3\CMS\Extbase\Service\ImageService;
  */
 trait ImageProcessor
 {
-
     /**
      * Add an additional argument, to overwrite the configured processor.
      */
@@ -82,9 +82,7 @@ trait ImageProcessor
             $image
         );
 
-        if (!empty($processor) &&
-            class_exists($processor)
-        ) {
+        if (!empty($processor) && class_exists($processor)) {
             // Do our own processing.
             $processingInstructions['tx_lazyfxx_processor'] = $processor;
             $smallProcessedImage = $imageService->applyProcessingInstructions(
@@ -103,7 +101,7 @@ trait ImageProcessor
     /**
      * Return the uri of the lazy image.
      *
-     * @param FileReference $image
+     * @param \TYPO3\CMS\Core\Resource\FileInterface $image
      *   The file reference image.
      * @param array $processingInstructions
      *   The processing information.
@@ -113,7 +111,7 @@ trait ImageProcessor
      *   The image service.
      * @param bool $absolute
      *   Are we using the absolute path.
-     * @param array$arguments
+     * @param array $arguments
      *   The arguments from the template.
      *
      * @return string
@@ -146,6 +144,8 @@ trait ImageProcessor
     /**
      * Retrieve the configured processor name.
      *
+     * @param array $arguments
+     * @param \TYPO3\CMS\Core\Resource\ResourceInterface $image
      * @return string
      */
     protected static function retrieveProcessorName(array $arguments, ResourceInterface $image): string
