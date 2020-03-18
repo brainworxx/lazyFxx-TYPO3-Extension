@@ -9,6 +9,10 @@
 Changelog
 =========
 
+2.0.0
+   - Updated to TYPO3 10.4
+   - Added picture/source lazy loading to the javascript.
+
 1.1.1
    - Updated the composer file.
 
