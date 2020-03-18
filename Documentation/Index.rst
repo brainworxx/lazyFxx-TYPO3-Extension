@@ -35,7 +35,7 @@ LazyFxx
 		lazy loading, image processing, page load optimization
 
 	:Copyright:
-		2017 - 2019
+		2017 - 2020
 
 	:Author:
 		BRAINWORXX GmbH
