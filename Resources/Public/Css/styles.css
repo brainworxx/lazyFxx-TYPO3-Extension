@@ -9,12 +9,14 @@
     position: relative;
 }
 
-.lazy-container img.lazyload-original {
+.lazy-container img.lazyload-original,
+.lazy-container img.lazyload-hide {
     opacity: 0;
 }
 
 .lazy-container img.lazyload-placeholder,
-.lazy-container img.lazyload-show {
+.lazy-container img.lazyload-show,
+.lazy-picture.lazy-loaded{
     opacity: 1;
 }
 
@@ -22,9 +24,7 @@
     position: initial;
 }
 
-.lazy-container img.lazyload-hide {
+.lazy-picture {
+    transition: opacity 500ms ease-out;
     opacity: 0;
 }
-
-
-

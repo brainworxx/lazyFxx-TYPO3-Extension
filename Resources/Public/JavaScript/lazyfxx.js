@@ -44,6 +44,13 @@
     lazyFxx.images = {};
 
     /**
+     * Caching of the source sets.
+     *
+     * @type {NodeList}
+     */
+    lazyFxx.sourceSets = {};
+
+    /**
      * Registering everything as soon as the dom is ready.
      *
      * @event DOMContentLoaded
@@ -56,15 +63,23 @@
     };
 
     /**
-     * Checking the visibility of the images when scrolling
+     * Checking the visibility of the images every second.
      *
      * @event interval
      */
     lazyFxx.checkList = function () {
+        var i;
         // Check on scroll, if any image is in viewport and trigger a lazy load.
-        for (var i = 0; i < lazyFxx.images.length; i++) {
+        for (i = 0; i < lazyFxx.images.length; i++) {
             if (lazyFxx.isInViewport(lazyFxx.images[i])) {
                 lazyFxx.lazyLoad(lazyFxx.images[i]);
+            }
+        }
+
+        // And while we are at it, also check the source elements.
+        for (i = 0; i < lazyFxx.sourceSets.length; i++) {
+            if (lazyFxx.isInViewport(lazyFxx.sourceSets[i])) {
+                lazyFxx.lazyLoadSourceSet(lazyFxx.sourceSets[i]);
             }
         }
     };
@@ -73,7 +88,8 @@
      * Update the list that we are watching.
      */
     lazyFxx.updateList = function () {
-        lazyFxx.images = document.querySelectorAll('.lazyload-placeholder');
+        lazyFxx.images = document.querySelectorAll('img.lazyload-placeholder');
+        lazyFxx.sourceSets = document.querySelectorAll('picture source.lazyload-placeholder');
     };
 
     /**
@@ -81,7 +97,7 @@
      *
      * @param {Node} el
      */
-    lazyFxx.isInViewport = function(el) {
+    lazyFxx.isInViewport = function (el) {
         var rect = el.getBoundingClientRect();
 
         var atAllTop    = rect.top >= 0 && rect.left >= 0;
@@ -98,7 +114,7 @@
      *
      * @param {Node} placeholder
      */
-    lazyFxx.lazyLoad = function(placeholder) {
+    lazyFxx.lazyLoad = function (placeholder) {
         // Create a new container around everything.
         var container = document.createElement('div');
         container.style['height'] = placeholder.offsetHeight + 'px';
@@ -130,6 +146,50 @@
     };
 
     /**
+     * We replace the src, simple as that.
+     *
+     * @param {Node} sourceSet
+     */
+    lazyFxx.lazyLoadSourceSet = function (sourceSet) {
+
+        // Replace the scr set.
+        var src = lazyFxx.getDataset(sourceSet, 'src');
+        if (src === '') {
+            return;
+        }
+
+        sourceSet.setAttribute('srcset', lazyFxx.getDataset(sourceSet, 'src'));
+        sourceSet.removeAttribute('data-src');
+        sourceSet.classList.remove('lazyload-placeholder');
+
+        // Play the animation.
+        var sibling = sourceSet.nextElementSibling;
+        while (sibling) {
+            if (sibling.matches('img:not(.lazy-done)')) {
+                sibling.classList.add('lazy-done');
+                sibling.classList.add('lazy-picture');
+                sibling.addEventListener('load', lazyFxx.animateSourcePicture);
+                return;
+            }
+            sibling = sibling.nextElementSibling
+        }
+    };
+
+    /**
+     * We replace the src, simple as that.
+     *
+     * @param {event} event
+     */
+    lazyFxx.animateSourcePicture = function (event) {
+        setTimeout(function () {
+            event.target.classList.add('lazy-loaded');
+        }, 100);
+
+        // We do this only once.
+        event.target.removeEventListener('load', lazyFxx.animateSourcePicture);
+    };
+
+    /**
      * Gets the dataset from an element.
      *
      * @param {Element} el
@@ -143,7 +203,7 @@
         var result = el.getAttribute('data-' + what);
         if (result === null) {
             return '';
-        }else {
+        } else {
             return result;
         }
     };
@@ -167,7 +227,7 @@
         var container = original.parentNode;
         var parent = container.parentNode;
 
-        setTimeout(function(){
+        setTimeout(function () {
             placeholder.className += ' lazyload-hide';
 
             // Display the image
@@ -179,7 +239,7 @@
 
             // Re-witch the placeholder and the original, so we can keep the
             // registered events, which are probably on the placeholder.
-            setTimeout(function(){
+            setTimeout(function () {
                 placeholder.style['transition'] = 'none';
                 placeholder.setAttribute('src', original.getAttribute('src'));
                 placeholder.className = original.className;
