@@ -167,7 +167,6 @@
         while (sibling) {
             if (sibling.matches('img:not(.lazy-done)')) {
                 sibling.classList.add('lazy-done');
-                sibling.classList.add('lazy-picture');
                 sibling.addEventListener('load', lazyFxx.animateSourcePicture);
                 return;
             }
@@ -181,12 +180,14 @@
      * @param {event} event
      */
     lazyFxx.animateSourcePicture = function (event) {
-        setTimeout(function () {
-            event.target.classList.add('lazy-loaded');
-        }, 100);
-
         // We do this only once.
         event.target.removeEventListener('load', lazyFxx.animateSourcePicture);
+
+        // Play the animation as soon as it's loaded.
+        event.target.classList.add('lazy-picture');
+        setTimeout(function () {
+            event.target.classList.add('lazy-loaded');
+        }, 200);
     };
 
     /**
