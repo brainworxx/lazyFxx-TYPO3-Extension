@@ -14,9 +14,9 @@ Viewhelpers
 
 LazyFxx is used inside the fluid templates. We hve provides three viewhelpers for this:
 
-  - Image viewhelper
-  - Media viewhelper
-  - Uri viewhelper
+- Image viewhelper
+- Media viewhelper
+- Uri viewhelper
 
 Those are essential the same as their original core counterparts.
 
@@ -35,13 +35,18 @@ Those are essential the same as their original core counterparts.
         If you are using the overwriteProcessor argument, please provide
         a fully qualified class name.
      -->
-    <lfxx:image src="path/to/my/image.png" alt="some description" />
-    <lfxx:media file="{fileobject}" width="400" height="375" overwriteProcessor="Brainworxx\Lazyfxx\Processors\BlurProcessor"/>
+    <lfxx:image src="path/to/my/image.png"
+                alt="some description" />
+    <lfxx:media file="{fileobject}"
+                width="400"
+                height="375"
+                overwriteProcessor="Brainworxx\Lazyfxx\Processors\BlurProcessor"/>
 
     <!--
         Get the uri of the lazy image
     -->
-    <lfxx:uri.image image="{imageReference}" overwriteProcessor="Brainworxx\Lazyfxx\Processors\BlurProcessor" />
+    <lfxx:uri.image image="{imageReference}"
+                    overwriteProcessor="Brainworxx\Lazyfxx\Processors\BlurProcessor" />
 
     </html>
 
@@ -84,7 +89,10 @@ Simple example with some hardcoded values.
         <!-- Fallback with lazy loading for the IE is also possible, if you absolutely have to.
         <lfxx:image image="{file}" title="{file.properties.title}" alt="{file.properties.alternative}" />
         -->
-        <f:image image="{file}" title="{file.properties.title}" alt="{file.properties.alternative}" maxWidth="400" />
+        <f:image image="{file}"
+                 title="{file.properties.title}"
+                 alt="{file.properties.alternative}"
+                 maxWidth="400" />
     </picture>
 
 
@@ -94,8 +102,8 @@ Use only the processor, and  not the JavaScript
 
 There are a lot of awesome lazyloading js libs out there. You do not have to use the provided library. Simply do the following:
 
-  - Use the uri viewhelper to get the uri of the lazy image
-  - Remove the js and css from the typoscript
+- Use the uri viewhelper to get the uri of the lazy image
+- Remove the js and css from the typoscript
 
 .. code-block:: typoscript
 
@@ -107,10 +115,10 @@ Use only the JavaScript and not the processor
 
 If you do not want to use the image processing of TYPO3 and only want to use the java script part, you only need to do the following:
 
-  - The src needs to point to the placeholder image.
-  - Add the class :literal:`lazyload-placeholder` to your image.
-  - Add the attribute :literal:`data-src` with the path to the image you want to load.
-  - Make sure that the files :literal:`lazyfxx.js` and :literal:`styles.css` are included on the frontend.
+- The src needs to point to the placeholder image.
+- Add the class :literal:`lazyload-placeholder` to your image.
+- Add the attribute :literal:`data-src` with the path to the image you want to load.
+- Make sure that the files :literal:`lazyfxx.js` and :literal:`styles.css` are included on the frontend.
 
 .. code-block:: html
 

@@ -26,12 +26,12 @@ lazyFxx uses this method to dynamically generate the TCA fpr the file reference.
 
 .. code-block:: php
 
-    public static function getMyName()
+    public static function getMyName(): array
     {
-        return array(
+        return [
             'The name the processor will have in the TYPO3 backend.',
             static::class
-        );
+        ];
     }
 
 
@@ -42,7 +42,7 @@ The GraphicsMagick instructions, performed on your image. If you do not use Grap
 
 .. code-block:: php
 
-    protected function instructionsGm()
+    protected function instructionsGm(): void
     {
         $this->simpleProcessStep('convert', "-blur 0x8");
     }
@@ -54,7 +54,7 @@ The ImageMagick instructions, performed on your image. If you do not use ImageMa
 
 .. code-block:: php
 
-    protected function instructionsIm()
+    protected function instructionsIm(): void
     {
         $this->simpleProcessStep('convert', "-blur 0x8");
     }

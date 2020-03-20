@@ -53,8 +53,8 @@ Use X-Classes for the ViewHelpers
 
 If you check this option, LazyFxx will use X-Classes to add its functionality to the frontend. The following ViewHelpers will be X-Classes:
 
-  - <f:image>
-  - <f:media>
+- <f:image>
+- <f:media>
 
 Whenever one of these ViewHelpers is used in your templates, LazyFxx is also used. Of cause X-Classing them may cause trouble elsewhere, and you may want to choose when you actually provide lazy loading on the frontend.
 That is why we have provided ViewHelpers for this purpose:
