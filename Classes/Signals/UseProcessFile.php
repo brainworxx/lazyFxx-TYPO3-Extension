@@ -79,12 +79,12 @@ class UseProcessFile
 
         // Test if we have to do anything.
         if (
-            isset($configuration['tx_lazyfxx_processor']) &&
-            class_exists($configuration['tx_lazyfxx_processor']) &&
-            is_a($configuration['tx_lazyfxx_processor'], AbstractProcessor::class, true)
+            isset($configuration[AbstractProcessor::TX_LAZYFXX_PROCESSOR]) &&
+            class_exists($configuration[AbstractProcessor::TX_LAZYFXX_PROCESSOR]) &&
+            is_a($configuration[AbstractProcessor::TX_LAZYFXX_PROCESSOR], AbstractProcessor::class, true)
         ) {
             // Jep, we need to do stuff.
-            $this->objectManager->get($configuration['tx_lazyfxx_processor'])
+            $this->objectManager->get($configuration[AbstractProcessor::TX_LAZYFXX_PROCESSOR])
                 ->process($event->getProcessedFile());
         }
     }

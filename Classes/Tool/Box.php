@@ -40,6 +40,15 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
  */
 class Box
 {
+    /**
+     * Array keys, used at various places.
+     */
+    protected const CONFIG_NAMESPACE = 'namespace';
+    protected const CONFIG_DIRECTORY = 'directory';
+    protected const PATHINFO_FILENAME = 'filename';
+    protected const CALLBACK_GET_MY_NAME = '::getMyName';
+    protected const CALLBACK_IS_DEFAULT = '::isDefault';
+
 
     /**
      * The backend settings.
@@ -81,7 +90,7 @@ class Box
      */
     public static function retrieveProcessorList(): array
     {
-        $namespace = rtrim(trim(static::$settings['namespace']), '\\') . '\\';
+        $namespace = rtrim(trim(static::$settings[static::CONFIG_NAMESPACE]), '\\') . '\\';
 
         $fileList = static::retrieveFileList();
         $processorList = [];
@@ -89,10 +98,10 @@ class Box
 
         if (!empty($fileList)) {
             foreach ($fileList as $filePath) {
-                $className = $namespace . pathinfo($filePath)['filename'];
-                $callBack = $className . '::getMyName';
+                $className = $namespace . pathinfo($filePath)[static::PATHINFO_FILENAME];
+                $callBack = $className . static::CALLBACK_GET_MY_NAME;
                 if (is_callable($callBack)) {
-                    if (call_user_func($className . '::isDefault', $className)) {
+                    if (call_user_func($className . static::CALLBACK_IS_DEFAULT, $className)) {
                         // Default class goes first.
                         array_unshift($processorList, call_user_func($callBack, $className));
                     } else {
@@ -117,12 +126,16 @@ class Box
         static $processor = '';
 
         if (empty($processor)) {
-            $namespace = rtrim(trim(static::$settings['namespace']), '\\') . '\\';
+            $namespace = rtrim(trim(static::$settings[static::CONFIG_NAMESPACE]), '\\') . '\\';
             $fileList = static::retrieveFileList();
 
             foreach ($fileList as $filePath) {
-                $className = trim($namespace . pathinfo($filePath)['filename'], '\\');
-                if (is_callable($className . '::isDefault') && call_user_func($className . '::isDefault')) {
+                $className = trim($namespace . pathinfo($filePath)[static::PATHINFO_FILENAME], '\\');
+
+                if (
+                    is_callable($className . static::CALLBACK_IS_DEFAULT) &&
+                    call_user_func($className . static::CALLBACK_IS_DEFAULT)
+                ) {
                     $processor = $className;
                     break;
                 }
@@ -139,7 +152,7 @@ class Box
     protected static function retrieveFileList(): array
     {
         // Scanning the processor folder for a dynamic class list.
-        $configPath = static::$settings['directory'];
+        $configPath = static::$settings[static::CONFIG_DIRECTORY];
         $configPath = rtrim($configPath, '/') . '/';
         $configPath = GeneralUtility::getFileAbsFileName($configPath);
 

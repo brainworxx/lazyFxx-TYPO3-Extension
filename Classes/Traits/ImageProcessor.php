@@ -30,6 +30,7 @@
 
 namespace Brainworxx\Lazyfxx\Traits;
 
+use Brainworxx\Lazyfxx\Processors\AbstractProcessor;
 use Brainworxx\Lazyfxx\Tool\Box;
 use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Resource\ResourceInterface;
@@ -84,7 +85,7 @@ trait ImageProcessor
 
         if (!empty($processor) && class_exists($processor)) {
             // Do our own processing.
-            $processingInstructions['tx_lazyfxx_processor'] = $processor;
+            $processingInstructions[AbstractProcessor::TX_LAZYFXX_PROCESSOR] = $processor;
             $smallProcessedImage = $imageService->applyProcessingInstructions(
                 $image,
                 $processingInstructions
@@ -129,7 +130,7 @@ trait ImageProcessor
 
         if (class_exists($processor)) {
             // Do our own processing.
-            $processingInstructions['tx_lazyfxx_processor'] = $processor;
+            $processingInstructions[AbstractProcessor::TX_LAZYFXX_PROCESSOR] = $processor;
 
             $smallProcessedImage = $imageService->applyProcessingInstructions(
                 $image,
@@ -158,7 +159,7 @@ trait ImageProcessor
         } elseif (Box::getSettings()['useDefaultProcessor'] === '1') {
             $processor = Box::retrieveDefaultProcessor();
         } elseif (is_a($image, FileReference::class)) {
-            $processor = $image->getReferenceProperties()['tx_lazyfxx_processor'];
+            $processor = $image->getReferenceProperties()[AbstractProcessor::TX_LAZYFXX_PROCESSOR];
         }
 
         return $processor;

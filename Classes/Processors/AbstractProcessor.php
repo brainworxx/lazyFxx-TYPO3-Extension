@@ -46,6 +46,20 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
  */
 abstract class AbstractProcessor
 {
+    /**
+     * Array key, where we store our configuration, at various places.
+     */
+    public const TX_LAZYFXX_PROCESSOR = 'tx_lazyfxx_processor';
+
+    /**
+     * The translation file.
+     */
+    protected const TRANSLATION_FILE = 'LLL:EXT:lazyfxx/Resources/Private/Language/locallang.xlf';
+
+    /**
+     * The convert commend for the processing.
+     */
+    protected const PROCESSING_CONVERT = 'convert';
 
     /**
      * Path to the local copy, used for the image manipulation.
