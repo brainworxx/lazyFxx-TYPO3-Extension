@@ -38,7 +38,7 @@ class GrayscaleBlurProcessor extends AbstractProcessor
     public static function getMyName(): array
     {
         return [
-            'LLL:EXT:lazyfxx/Resources/Private/Language/locallang.xlf:filter.label.grayscaleblur',
+            static::TRANSLATION_FILE . ':filter.label.grayscaleblur',
             static::class
         ];
     }
@@ -49,16 +49,16 @@ class GrayscaleBlurProcessor extends AbstractProcessor
     protected function instructionsGm(): void
     {
         // Greyscale
-        $this->simpleProcessStep('convert', "-colorspace GRAY +matte");
+        $this->simpleProcessStep(static::PROCESSING_CONVERT, "-colorspace GRAY +matte");
         // Bur
-        $this->simpleProcessStep('convert', "-blur 0x8");
+        $this->simpleProcessStep(static::PROCESSING_CONVERT, "-blur 0x8");
     }
 
     protected function instructionsIm(): void
     {
          // Greyscale
-        $this->simpleProcessStep('convert', "-type GrayScaleMatte");
+        $this->simpleProcessStep(static::PROCESSING_CONVERT, "-type GrayScaleMatte");
         // Bur
-        $this->simpleProcessStep('convert', "-blur 0x8");
+        $this->simpleProcessStep(static::PROCESSING_CONVERT, "-blur 0x8");
     }
 }

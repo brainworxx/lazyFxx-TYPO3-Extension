@@ -38,7 +38,7 @@ class GrayscaleProcessor extends AbstractProcessor
     public static function getMyName(): array
     {
         return [
-            'LLL:EXT:lazyfxx/Resources/Private/Language/locallang.xlf:filter.label.grayscale',
+            static::TRANSLATION_FILE . ':filter.label.grayscale',
             static::class
         ];
     }
@@ -48,7 +48,7 @@ class GrayscaleProcessor extends AbstractProcessor
      */
     protected function instructionsGm(): void
     {
-        $this->simpleProcessStep('convert', "-colorspace GRAY +matte");
+        $this->simpleProcessStep(static::PROCESSING_CONVERT, "-colorspace GRAY +matte");
     }
 
     /**
@@ -56,6 +56,6 @@ class GrayscaleProcessor extends AbstractProcessor
      */
     protected function instructionsIm(): void
     {
-        $this->simpleProcessStep('convert', "-type GrayScaleMatte");
+        $this->simpleProcessStep(static::PROCESSING_CONVERT, "-type GrayScaleMatte");
     }
 }

@@ -27,6 +27,8 @@
  *   Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
+use Brainworxx\Lazyfxx\Processors\AbstractProcessor;
+
 if (!defined('TYPO3_MODE')) {
     die('Access denied.');
 }
@@ -37,7 +39,7 @@ $useDefault = \Brainworxx\Lazyfxx\Tool\Box::getSettings()['useDefaultProcessor']
 if ($useDefault !== '1') {
     // Add the filter dropdown to the FAL image display in the backend.
     $tempColumns = [
-        'tx_lazyfxx_processor' => [
+        \Brainworxx\Lazyfxx\Processors\AbstractProcessor::TX_LAZYFXX_PROCESSOR => [
             'exclude' => 0,
             'label' => 'LLL:EXT:lazyfxx/Resources/Private/Language/locallang.xlf:filter.label',
             'config' => [
@@ -55,7 +57,8 @@ if ($useDefault !== '1') {
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToAllPalettesOfField(
         'sys_file_reference',
         'description',
-        'tx_lazyfxx_processor'
+        \Brainworxx\Lazyfxx\Processors\AbstractProcessor::TX_LAZYFXX_PROCESSOR
     );
-    $GLOBALS['TCA']['sys_file_reference']['palettes']['imageoverlayPalette']['showitem'] .= ', tx_lazyfxx_processor';
+    $GLOBALS['TCA']['sys_file_reference']['palettes']['imageoverlayPalette']['showitem'] .=
+        ', ' . \Brainworxx\Lazyfxx\Processors\AbstractProcessor::TX_LAZYFXX_PROCESSOR;
 }

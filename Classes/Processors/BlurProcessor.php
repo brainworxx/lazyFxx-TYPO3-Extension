@@ -44,7 +44,7 @@ class BlurProcessor extends AbstractProcessor
     public static function getMyName(): array
     {
         return [
-            'LLL:EXT:lazyfxx/Resources/Private/Language/locallang.xlf:filter.label.blur',
+            static::TRANSLATION_FILE . ':filter.label.blur',
             static::class
         ];
     }
@@ -54,7 +54,7 @@ class BlurProcessor extends AbstractProcessor
      */
     protected function instructionsGm(): void
     {
-        $this->simpleProcessStep('convert', "-blur 0x8");
+        $this->simpleProcessStep(static::PROCESSING_CONVERT, "-blur 0x8");
     }
 
     /**
@@ -62,6 +62,6 @@ class BlurProcessor extends AbstractProcessor
      */
     protected function instructionsIm(): void
     {
-        $this->simpleProcessStep('convert', "-blur 0x8");
+        $this->simpleProcessStep(static::PROCESSING_CONVERT, "-blur 0x8");
     }
 }
