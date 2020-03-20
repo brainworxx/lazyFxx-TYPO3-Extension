@@ -91,7 +91,7 @@ trait ImageProcessor
                 $processingInstructions
             );
 
-            $smallImageUri = $imageService->getImageUri($smallProcessedImage, $this->arguments['absolute']);
+            $smallImageUri = $imageService->getImageUri($smallProcessedImage, empty($this->arguments['absolute']));
 
             $this->tag->addAttribute('src', $smallImageUri);
             $this->tag->addAttribute('data-src', $imageUri);
