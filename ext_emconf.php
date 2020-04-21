@@ -40,7 +40,7 @@ $EM_CONF[$_EXTKEY] = [
     'createDirs' => '',
     'constraints' => [
         'depends' => [
-            'typo3' => '10.3.0-10.4.99'
+            'typo3' => '10.4.0-10.4.99'
         ],
         'conflicts' => [],
         'suggests' => [],

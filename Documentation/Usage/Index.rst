@@ -86,9 +86,6 @@ Simple example with some hardcoded values.
                 srcset="{lfxx:uri.image(image: file, maxWidth: 1024)}"
                 data-src="{f:uri.image(image: file, maxWidth: 1024)}">
 
-        <!-- Fallback with lazy loading for the IE is also possible, if you absolutely have to.
-        <lfxx:image image="{file}" title="{file.properties.title}" alt="{file.properties.alternative}" />
-        -->
         <f:image image="{file}"
                  title="{file.properties.title}"
                  alt="{file.properties.alternative}"
