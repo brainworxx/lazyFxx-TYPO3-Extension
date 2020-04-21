@@ -47,4 +47,3 @@ $EM_CONF[$_EXTKEY] = [
     ],
     'clearcacheonload' => true,
 ];
-
