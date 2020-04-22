@@ -11,18 +11,18 @@ Writing your own processors
 
 lazyFxx allows you to create your own image processing classes:
 
-  - Create an extension, if you have not done so already.
-  - Create a new class somewhere in the class folder of your extension.
-  - Let this new class extend the :literal:`\\Brainworxx\\Lazyfxx\\Processors\\AbstractProcessor`
-  - Name your class XyzProcessor, where you can use whatever name you want, followed with :literal:`Processor`
-  - The filename must be the same as the class name.
+- Create an extension, if you have not done so already.
+- Create a new class somewhere in the class folder of your extension.
+- Let this new class extend the :literal:`\\Brainworxx\\Lazyfxx\\Processors\\AbstractProcessor`
+- Name your class XyzProcessor, where you can use whatever name you want, followed with :literal:`Processor`
+- The filename must be the same as the class name.
 
 This new processor class needs three different methods:
 
 1. getMyName()
 ^^^^^^^^^^^^^^
 
-lazyFxx uses this method to dynamically generate the TCA fpr the file reference.
+lazyFxx uses this method to dynamically generate the TCA for the file reference.
 
 .. code-block:: php
 

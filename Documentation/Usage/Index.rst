@@ -50,8 +50,6 @@ Those are essential the same as their original core counterparts.
 
     </html>
 
-xxx
-
 There is however an additional argument: :literal:`overwriteProcessor`. Here you can overwrite the configured processor class.
 
 Picture and source tags

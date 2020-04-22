@@ -29,7 +29,7 @@
 
 $EM_CONF[$_EXTKEY] = [
     'title' => 'LazyFxx',
-    'description' => 'LazyFxx, image lazy loading with placeholders made by the TYPO3 image processing. You can also write your own image processors.',
+    'description' => 'LazyFxx, image processing and lazy loading with placeholders. You can also write your own image processors.',
     'category' => 'fe',
     'version' => '2.0.0 dev',
     'state' => 'beta',
@@ -47,3 +47,4 @@ $EM_CONF[$_EXTKEY] = [
     ],
     'clearcacheonload' => true,
 ];
+

@@ -12,7 +12,7 @@ Links
 -----
 
 :TER:
-	https://typo3.org/extensions/repository/view/lazyfxx
+	https://extensions.typo3.org/extension/lazyfxx
 
 :Bug Tracker:
 	https://github.com/brainworxx/lazyFxx-TYPO3-Extension/issues

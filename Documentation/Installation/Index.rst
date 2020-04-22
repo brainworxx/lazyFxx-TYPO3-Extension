@@ -15,5 +15,5 @@ Installation
 - Include the LazyFxx typoscript
 
 **Upgrade from previous versions:**
-|
-The :literal:`AbstractProcessor` has changed slightly. Make sure you adjust the return values of your implemented / overwritten methods.
+
+- The :literal:`AbstractProcessor` has changed slightly. Make sure you adjust the return values of your implemented / overwritten methods.
