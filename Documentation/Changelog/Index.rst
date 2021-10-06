@@ -9,6 +9,9 @@
 Changelog
 =========
 
+2.0.1
+   - Declare it obsolete.
+
 2.0.0
    - Updated to TYPO3 10.4
    - Added picture/source lazy loading to the javascript.
